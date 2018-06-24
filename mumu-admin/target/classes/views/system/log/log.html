@@ -1,0 +1,77 @@
+<div class="row" ng-controller="logController">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>业务日志</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-2">
+								<div class="input-group">
+									<div class="input-group-btn">
+										<button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">日志名称
+										</button>
+									</div>
+									<input type="text" class="form-control" ng-model="searchItem.logName">
+								</div>                               
+							</div>
+							<div class="col-sm-2">
+								<div class="input-group">
+									<div class="input-group-btn">
+										<button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">注册开始日期
+										</button>
+									</div>
+									<input type="text" class="form-control bg-white" id="beginTime" readonly="readonly" ng-model="searchItem.beginTime" placeholder="yyyy-MM-dd">
+								</div>   
+							</div>
+							<div class="col-sm-2">
+								<div class="input-group">
+									<div class="input-group-btn">
+										<button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">注册结束日期
+										</button>
+									</div>
+									<input type="text" class="form-control bg-white" id="endTime" readonly="readonly" ng-model="searchItem.endTime" placeholder="yyyy-MM-dd">
+								</div>   
+							</div>
+							 <div class="col-sm-2">
+                             	<div class="input-group">
+                               		<div class="input-group-btn">
+										<button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">日志类型
+										</button>
+									</div>
+									<select class="form-control" ng-model="searchItem.logType">
+									    <option value="0" ng-selected="searchItem.logType == ''">全部</option>
+										<option value="1" ng-selected="searchItem.logType == 1">业务日志</option>
+										<option value="2" ng-selected="searchItem.logType == 2">异常日志</option>
+									</select>
+								</div>
+                            </div>
+							<div class="col-sm-2">
+								<button type="button" class="btn btn-primary " ng-click="toFirstPage()">
+									<i class="fa fa-search"></i>&nbsp;搜索
+								</button>
+								<button type="button" class="btn btn-primary " ng-click="clear()">
+									<i class="fa fa-refresh"></i>&nbsp;清除
+								</button>
+							</div>
+						</div>
+						<div class="hidden-xs mt-10">
+							<button type="button" class="btn btn-primary " ng-click="openDetail()">
+								<i class="fa fa-file-text"></i>&nbsp;查看详情
+							</button>
+							<button type="button" class="btn btn-primary button-margin" ng-click="deleteLog()">
+									<i class="fa fa-minus"></i>&nbsp;删除日志
+							</button>
+							<button type="button" class="btn btn-primary button-margin" ng-click="deleteAllLog()">
+								<i class="fa fa-trash-o"></i>&nbsp;清空日志
+							</button>
+						</div>
+						<table class="layui-hide"  lay-filter="log_table"></table> 
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

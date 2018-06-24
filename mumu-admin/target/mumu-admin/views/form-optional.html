@@ -1,0 +1,10 @@
+﻿<div class="form-group">
+    <label for="gender">您的性别：</label>
+    <input type="radio" value="man" class="form-control" ng-model="formData.gender">男
+    <input type="radio" value="woman" class="form-control" ng-model="formData.gender">女
+</div>
+<br />
+<div class="form-group">
+    <button ui-sref-active="active" ui-sref="form.required" class="btn btn-success">上一项</button>
+    <button ui-sref-active="active" ui-sref="form.confirm" class="btn btn-success">下一项</button>
+</div>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mumu.modular.system.dao.RoleMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.mumu.modular.system.model.Role">
+		<id column="id" property="id" />
+		<result column="num" property="num" />
+		<result column="pid" property="pid" />
+		<result column="name" property="name" />
+		<result column="tips" property="tips" />
+		<result column="version" property="version" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, num, pid, name, tips, version
+	</sql>
+
+	<select id="selectRoles" resultType="map">
+		select
+		<include refid="Base_Column_List" />
+		from sys_role
+		<if test="condition != null">
+			where name like CONCAT('%',#{condition},'%')
+		</if>
+	</select>
+	
+	<select id="selectRoleByName" resultType="role">
+		select
+		<include refid="Base_Column_List" />
+		from sys_role
+		where name = #{name}
+	</select>
+
+	<delete id="deleteRolesById">
+		delete from sys_relation where roleid = #{roleId}
+	</delete>
+</mapper>

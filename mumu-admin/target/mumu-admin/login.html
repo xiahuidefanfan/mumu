@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>牧牧后台管理系统</title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="./css/lib/bootstrap.min.css">
+        <link rel="stylesheet" href="./css/lib/font-awesome.min.css">
+        <link rel="stylesheet" href="./css/index/style.css">
+        <link rel="stylesheet" href="./css/index/iconfont.css">
+        <link rel="stylesheet" href="./css/index/index.css">
+        
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="../image/ico/favicon.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../image/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../image/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../image/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="../image/ico/apple-touch-icon-57-precomposed.png">
+
+    </head>
+
+    <body ng-app="login" ng-controller="loginController">
+
+        <!-- Top content -->
+        <div class="top-content">
+            <div class="inner-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2 text">
+                            <h1><strong>牧牧</strong>后台管理系统 </h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3 form-box">
+                        	<div class="form-top">
+                        		<div class="form-top-left">
+                        			<h3>登陆您的系统</h3>
+                            		<p>账号、密码不可为空</p>
+                        		</div>
+                        		<div class="form-top-right">
+                        			<i class="fa fa-key"></i>
+                        		</div>
+                            </div>
+                            <div class="form-bottom">
+			                    <form class="login-form" name="loginForm">
+			                    	<div class="form-group">
+			                        	<input type="text"  
+			                        	       placeholder="请输入账号..." 
+			                        	       class="form-username form-control" 
+			                        	       name="account"
+			                        	       ng-model="account"
+			                        	       required>
+			                        </div>
+			                        <div class="form-group">
+			                        	<input type="password" 
+			                        	       placeholder="请输入密码..." 
+			                        	       class="form-password form-control" 
+			                        	       name="password"
+			                        	       ng-model="password"
+			                        	       required>
+			                        </div>
+		                           	<div class="form-group">
+				                        <input type="checkbox"> 记住我
+				                    </div>
+			                        <button ng-class="{'btn':true, 
+			                                           'btn-disable': loginForm.account.$error.required ||  
+							 										  loginForm.password.$error.required}" 
+									        ng-disabled="loginForm.account.$error.required || 
+										              loginForm.password.$error.required" 
+										    ng-click="doLogin()">登陆</button>
+			                    </form>
+		                    </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3 social-login">
+                        	<p>第三方登录</p>
+							<a href="#">
+								<i class="iconfont icon-qq"></i>
+							</a>
+							<a href="#">
+								<i class="iconfont icon-wechat"></i>
+							</a>
+							<a href="#">
+								<i class="iconfont icon-sina"></i>
+							</a>
+							<p class="text-center mt-10">
+								<a href="register.html">没有账号?前往注册账号</a>
+							</p>
+                        </div>
+                    </div>
+        	</div>
+        </div>
+        
+        <!-- Javascript -->
+        <script data-main="js/config.js" src="js/lib/angular/angular.min.js"></script>
+		<script data-main="js/config.js" src="js/scripts/controller/loginController.js"></script>
+    </body>
+
+</html>
