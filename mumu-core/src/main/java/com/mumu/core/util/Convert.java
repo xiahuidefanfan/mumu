@@ -430,7 +430,7 @@ public class Convert {
 	 * @return 结果
 	 */
 	public static String[] toStrArray(String str) {
-		return toStrArray("", str);
+		return toStrArray(",", str);
 	}
 	
 	/**

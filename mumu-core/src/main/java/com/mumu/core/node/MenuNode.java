@@ -8,21 +8,26 @@ import java.util.List;
 import com.mumu.core.constant.IsMenu;
 
 /**
- * @author fengshuonan
- * @Description 菜单的节点
- * @date 2016年12月6日 上午11:34:17
+ * 
+ * 〈一句话功能简述〉<br> 
+ *  菜单的节点
+ *
+ * @author 88396254
+ * @date 2018年6月25日 上午10:00:08
+ * @see [相关类/方法]（可选）
+ * @since [产品/模块版本] （可选）
  */
 public class MenuNode implements Comparable<Object> {
 
     /**
      * 节点id
      */
-    private Long id;
+    private String id;
 
     /**
      * 父节点
      */
-    private Long parentId;
+    private String parentId;
 
     /**
      * 节点名称
@@ -73,7 +78,7 @@ public class MenuNode implements Comparable<Object> {
         super();
     }
 
-    public MenuNode(Long id, Long parentId) {
+    public MenuNode(String id, String parentId) {
         super();
         this.id = id;
         this.parentId = parentId;
@@ -96,22 +101,22 @@ public class MenuNode implements Comparable<Object> {
     }
 
     public static MenuNode createRoot() {
-        return new MenuNode(0L, -1L);
+        return new MenuNode("0", "-1");
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getParentId() {
+    public String getParentId() {
         return parentId;
     }
 
-    public void setParentId(Long parentId) {
+    public void setParentId(String parentId) {
         this.parentId = parentId;
     }
 
@@ -194,13 +199,13 @@ public class MenuNode implements Comparable<Object> {
      *
      * @author fengshuonan
      */
-    public List<MenuNode> findChildNodes(List<MenuNode> nodeList, Long parentId) {
+    public List<MenuNode> findChildNodes(List<MenuNode> nodeList, String parentId) {
         if (nodeList == null && parentId == null)
             return null;
         for (Iterator<MenuNode> iterator = nodeList.iterator(); iterator.hasNext(); ) {
             MenuNode node = (MenuNode) iterator.next();
             // 根据传入的某个父节点ID,遍历该父节点的所有子节点
-            if (node.getParentId() != 0 && parentId.equals(node.getParentId())) {
+            if (!node.getParentId().equals("0") && parentId.equals(node.getParentId())) {
                 recursionFn(nodeList, node, parentId);
             }
         }
@@ -212,7 +217,7 @@ public class MenuNode implements Comparable<Object> {
      *
      * @author fengshuonan
      */
-    public void recursionFn(List<MenuNode> nodeList, MenuNode node, Long pId) {
+    public void recursionFn(List<MenuNode> nodeList, MenuNode node, String pId) {
         List<MenuNode> childList = getChildList(nodeList, node);// 得到子节点列表
         if (childList.size() > 0) {// 判断是否有子节点
             if (node.getParentId().equals(pId)) {
@@ -285,6 +290,7 @@ public class MenuNode implements Comparable<Object> {
      */
     public static List<MenuNode> buildTitle(List<MenuNode> nodes) {
 
+        // 出去按钮级别的菜单
         List<MenuNode> clearBtn = clearBtn(nodes);
 
         new MenuNode().buildNodeTree(clearBtn);
