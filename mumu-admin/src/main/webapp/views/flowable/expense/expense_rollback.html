@@ -1,0 +1,47 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="ibox float-e-margins">
+		<div class="ibox-content">
+			<div class="form-horizontal bv-form" >
+				<div class="row" ng-form="editForm">
+					<div class="col-sm-12 b-r">
+						<div ng-class="{'form-group': true, 'has-feedback': true, 
+						                'has-error': editForm.node.$error.required 
+											      && editForm.node.$dirty}">
+							<label class="col-sm-2 control-label">回退节点</label>
+							<div class="col-sm-9">
+								<select ng-model="submitData.targetNode" 
+										name="node" class="form-control" 
+										ng-options="node.nodeName for node in nodes"
+										required>
+								</select>
+								<small style="display: block;color: #ed5565"
+									   ng-if="editForm.node.$error.required 
+							       		   && editForm.node.$dirty">请选择回退节点
+								</small>
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+						
+					</div>
+					<div>
+						<label class="col-sm-2 control-label">流程图</label>
+						<img style="-webkit-user-select: none;" ng-src="{{submitData.expenseViewUrl}}">
+						<div class="hr-line-dashed"></div>
+					</div>
+				</div>
+				<div class="row btn-group-m-t">
+					<div class="col-sm-10">
+						<button type="button" class="btn btn-success dialog-btn"
+							ng-click="rollbackSubmit()">
+							<i class="fa fa-check"></i>&nbsp;提交
+						</button>
+						<button type="button" class="btn btn-danger dialog-btn"
+							ng-click="closeLayer()" id="cancel">
+							<i class="fa fa-eraser"></i>&nbsp;取消
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,121 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="ibox float-e-margins">
+		<div class="ibox-content">
+			<div class="form-horizontal bv-form" >
+				<div class="row" ng-form="editForm">
+					<div class="col-sm-6 b-r">
+						<div ng-class="{'form-group': true, 'has-feedback': true, 
+						                'has-error': editForm.name.$error.required 
+											      && editForm.name.$dirty}">
+							<label class="col-sm-3 control-label">菜单名称</label>
+							<div class="col-sm-9">
+								<input class="form-control"	ng-model="submitData.name" name="name" required>
+								<small style="display: block;color: #ed5565"
+									   ng-if="editForm.name.$error.required 
+							       		   && editForm.name.$dirty">名称不能为空
+								</small>
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+						
+						<div ng-class="{'form-group':true, 'has-feedback':true, 
+					               'has-error': editForm.pcodeName.$error.required 
+											     && editForm.pcodeName.$dirty}">
+						 	<div class="zTreeDemoBackground left" id="menuMenu" style='display:none'>
+								<ul id="menuTree" class="ztree tree-box"></ul>
+							</div>					     
+							<label class="col-sm-3 control-label">父级菜单</label>
+							<div class="col-sm-9" ng-click="showMenuTree()">
+								<input class="form-control"	ng-model="submitData.pcodeName" name="pcodeName" required>
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+						
+					    <div class="form-group has-feedback">
+							<label class="col-sm-3 control-label">是否菜单</label>
+							<div class="col-sm-9">
+								<select class="form-control" 
+										ng-init="submitData.ismenu=1"
+								        ng-model="submitData.ismenu" 
+								        name="ismenu">
+									<option value="1" ng-selected="submitData.ismenu == 1">是</option>
+									<option value="0" ng-selected="submitData.ismenu == 0">不是</option>
+								</select>
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+						
+						<div ng-class="{'form-group': true, 'has-feedback': true, 
+						                'has-error': editForm.route.$error.required 
+											      && editForm.route.$dirty}"
+							 ng-if="submitData.ismenu == 1">
+							<label class="col-sm-3 control-label">菜单路由</label>
+							<div class="col-sm-9">
+								<input class="form-control"	
+									   ng-model="submitData.route" 
+									   name="route" 
+									   required>
+								<small style="display: block;color: #ed5565"
+									   ng-if="editForm.route.$error.required 
+							       		   && editForm.route.$dirty">菜单路由不能为空
+								</small>
+							</div>
+						</div>
+						
+					</div>
+					
+					<div class="col-sm-6">
+						<div ng-class="{'form-group':true, 'has-feedback':true, 
+					                    'has-error':editForm.code.$error.required 
+											     && editForm.code.$dirty}">
+							<label class="col-sm-3 control-label">菜单编号</label>
+							<div class="col-sm-9">
+								<input class="form-control"	ng-model="submitData.code" name="code" required>
+								<small style="display: block;color:#ed5565"
+									   ng-if="editForm.code.$error.required 
+							       		   && editForm.code.$dirty">菜单编号不能为空
+								</small>
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+					
+						<div ng-class="{'form-group':true, 'has-feedback':true, 
+						                'has-error': editForm.url.$error.required 
+								      && editForm.url.$dirty}">
+							<label class="col-sm-3 control-label">请求地址</label>
+							<div class="col-sm-9">
+								<input class="form-control"	ng-model="submitData.url" name="url" required>
+								<small style="display: block;color:#ed5565"
+									   ng-if="editForm.url.$error.required 
+							       		   && editForm.url.$dirty">请求地址不可为空
+								</small>
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+					
+						<div class="form-group has-feedback">
+							<label class="col-sm-3 control-label">图标</label>
+							<div class="col-sm-9">
+								<input class="form-control"	
+									   ng-model="submitData.icon">
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+					</div>
+				</div>
+				<div class="row btn-group-m-t">
+					<div class="col-sm-10">
+						<button type="button" class="btn btn-success dialog-btn"
+							ng-click="addSubmit()" id="ensure">
+							<i class="fa fa-check"></i>&nbsp;提交
+						</button>
+						<button type="button" class="btn btn-danger dialog-btn"
+							ng-click="closeLayer()" id="cancel">
+							<i class="fa fa-eraser"></i>&nbsp;取消
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

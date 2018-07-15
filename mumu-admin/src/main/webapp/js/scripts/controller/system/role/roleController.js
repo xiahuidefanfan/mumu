@@ -1,11 +1,12 @@
-define(['app', 'menuTreeService', 'permissionService', 'roleTreeService', 'urlConstants','operateUtil', 'tableUtil'], function (app) {
+define(['app', 'menuTreeService', 'permissionService', 'roleTreeService', 'urlConstants', 
+		'operateUtil', 'treeTableUtil','bootstrapTreeTable'], function (app) {
     app.controller('roleController',['$scope',
     								 'menuTreeService',
     								 'permissionService',
     								 'roleTreeService',
     								 'urlConstants', 
     								 'operateUtil', 
-    								 'tableUtil',
+    								 'treeTableUtil',
     								 'layer', 
     					   function ($scope, 
     							     menuTreeService,
@@ -13,7 +14,7 @@ define(['app', 'menuTreeService', 'permissionService', 'roleTreeService', 'urlCo
     							     roleTreeService,
     								 urlConstants, 
     								 operateUtil,
-    								 tableUtil,
+    								 treeTableUtil,
     								 layer){
     	
     	
@@ -54,7 +55,8 @@ define(['app', 'menuTreeService', 'permissionService', 'roleTreeService', 'urlCo
     					area: ['800px','auto'],
                         contentUrl: urlConstants.ROLE_UPDATE_PAGE_URL
                     },
-                    setChosed: true
+                    setChosed: true,
+                    tableType: 'tree'
     			}
 			);
 	    }
@@ -76,8 +78,8 @@ define(['app', 'menuTreeService', 'permissionService', 'roleTreeService', 'urlCo
     		operateUtil.confirmSubmit({
  				scope:$scope,
  				url: urlConstants.ROLE_DELETE_URL,
- 				multiple: false,
- 				msg: '确定要删除选中数据吗？'
+ 				tableType: 'tree',
+ 				msg: '确定要删除选中的角色吗？'
  				
  			})
     	}
@@ -91,9 +93,10 @@ define(['app', 'menuTreeService', 'permissionService', 'roleTreeService', 'urlCo
     				scope: $scope,
     				layerprops:{
     					title: '权限分配',
-    					area:['312px', '480px'],
+    					area:['322px', '480px'],
                         contentUrl: urlConstants.ROLE_ASSIGN_PAGE_URL
                     },
+                    tableType: 'tree',
                     setChosed: true
     			},
     			getAuthorityTree
@@ -161,8 +164,6 @@ define(['app', 'menuTreeService', 'permissionService', 'roleTreeService', 'urlCo
     	 * 显示角色树（父子级select树）
     	 */
     	$scope.showRoleTree = function(){
-		    $scope.roleTreeCheckable = false; // 角色设置展示的角色树是否显示复选框,即是否支持多选
-    	    $scope.roleTreePable = true; // 角色树是否展示为父子级结构
     		roleTreeService.getRoleTree($scope, roleTreeService.showRoleTree);
     	}
     	
@@ -196,10 +197,13 @@ define(['app', 'menuTreeService', 'permissionService', 'roleTreeService', 'urlCo
 	   function setDefaultVars(){
 		   $scope.rootDeptPid = 0;
 		   $scope.depts = [];// 列表展示数据
+		   $scope.menuTreeCheckable = true; // 权限树展示成复选框样式
 		   $scope.defaultSearchItem = {
 			   name: ''   
 		   };// 搜索初始值
 		   $scope.searchItem = angular.copy($scope.defaultSearchItem);
+		   $scope.roleTreeCheckable = false; // 角色设置展示的角色树是否显示复选框,即是否支持多选
+   	       $scope.roleTreePable = true; // 角色树是否展示为父子级结构
 		   $scope.submitData = {}; // 选中的角色
 		   $scope.authority = {};
 		   $scope.buttonPermission = {
@@ -211,34 +215,27 @@ define(['app', 'menuTreeService', 'permissionService', 'roleTreeService', 'urlCo
 		   $scope.buttons = ['/role/add','/role/update','/role/delete','/role/setAuthority'];
 		   
 		   $scope.tableOptions = {
+			    tableId: 'roleTable' ,// 选取记录返回的值
+			    code: 'id',// 用于设置父子关系
+	            parentCode: 'pid',// 用于设置父子关系
    		        url: urlConstants.ROLE_LIST_URL, //请求地址
-   		        method: 'POST', //方式
-   		        id: 'listReload', //生成 Layui table 的标识 id，必须提供，用于后文刷新操作，笔者该处出过问题
-   		        cols: [[
-   	    		      {checkbox: true, fixed: true},
-   	    		      {field:'id', title: 'id', align: 'center', valign: 'middle', sort: true},
-   	    		      {field:'name', title: '名称', align: 'center', valign: 'middle', sort: true},
-   	    		      {field:'pName', title: '上级角色', align: 'center', valign: 'middle', sort: true},
-   	    		      {field:'tips', title: '别名', align: 'center', valign: 'middle', sort: true},
-   	    		      {field:'num', title: '排序', align: 'center', valign: 'middle', sort: true}
-   	    		    ]],
-   	    		even: false, // 样式
+   		        ajaxParams: $scope.searchItem, //请求数据的ajax的data属性
+   		        columns: [
+	        		  {field: 'selectItem', radio: true},
+   	    		      {field:'id', title: 'id', align: 'center'},
+   	    		      {field:'name', title: '角色名称'},
+   	    		      {field:'tips', title: '角色编码', align: 'center'},
+   	    		      {field:'pName', title: '上级角色', align: 'center'},
+   	    		      {field:'num', title: '排序', align: 'center'}
+   	    		    ],
    			    height: 570,
-   		        page: false, //是否分页
-   		        where: $scope.searchItem, //请求后端接口的条件
-   		        response: {
-   		            statusName: 'statusCode', //状态字段名称
-   		            statusCode: '200', //状态字段成功值
-   		            msgName: 'errorMessage', //消息字段
-   		            dataName: 'data' //数据字段
-   		        }
    		   };
 		   
 		   /**
 		    * 刷新表格
 		    */
 		   $scope.reloadTable = function(){
-			   tableUtil.reloadTable($scope);
+			   treeTableUtil.reloadTable($scope);
 		   }
    	   }
 		   
@@ -246,12 +243,8 @@ define(['app', 'menuTreeService', 'permissionService', 'roleTreeService', 'urlCo
 	    * 展示主页面数据
 	    */
 	   function showMain(){
-		   layui.use('table', function(){
-    		   $scope.table = layui.table;
-    		   // 初始化表格
-			   $scope.table.init('role_table', $scope.tableOptions);
-    	   });
-	   }
+		   $scope.table = treeTableUtil.treeTable($scope);
+	    }	
 	   
 	   /**
 	    * 按钮权限

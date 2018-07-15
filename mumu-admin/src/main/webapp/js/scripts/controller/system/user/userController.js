@@ -78,7 +78,7 @@ define(['app','deptTreeService', 'permissionService', 'roleTreeService',
      				scope: $scope,
      				url: urlConstants.MGR_DELETE_URL,
      				multiple: true,
-     				msg: '确定要删除该用户吗？'
+     				msg: '确定要删除选中的用户吗？'
      			});
          	 }
          	 
@@ -89,7 +89,6 @@ define(['app','deptTreeService', 'permissionService', 'roleTreeService',
          		operateUtil.confirmSubmit({
          			scope: $scope,
      				url: urlConstants.MGR_RESET_PASSWORD_URL,
-     				multiple: false,
      				msg: '确定要重置为系统默认密码吗？'
          		});
          	 }
@@ -101,7 +100,6 @@ define(['app','deptTreeService', 'permissionService', 'roleTreeService',
          		operateUtil.confirmSubmit({
          			scope:$scope,
      				url: urlConstants.MGR_FREEZE_URL,
-     				multiple: false,
      				msg: '确定要冻结该用户吗？'
          		});
          	 }
@@ -113,7 +111,6 @@ define(['app','deptTreeService', 'permissionService', 'roleTreeService',
           		operateUtil.confirmSubmit({
           			scope:$scope,
       				url: urlConstants.MGR_UNFREEZE_URL,
-      				multiple: false,
       				msg: '确定要解冻该用户吗？'
           		});
           	 }
@@ -154,7 +151,7 @@ define(['app','deptTreeService', 'permissionService', 'roleTreeService',
 	    	 */
 	    	$scope.chooseDeptTree = function(event, treeId, treeNode) {
 	    		if(null != treeNode){
-		    		$scope.submitData.deptid = treeNode.id;
+		    		$scope.submitData.deptId = treeNode.id;
 		    		$scope.submitData.deptName = treeNode.name;
 		    		$scope.$apply();
 	    		}
@@ -164,8 +161,6 @@ define(['app','deptTreeService', 'permissionService', 'roleTreeService',
 	    	 * 添加、编辑页面-显示角色选择树
 	    	 */
 	    	$scope.showRoleTree = function(){
-    		    $scope.roleTreeCheckable = true; // 角色设置展示的角色树是否显示复选框,即是否支持多选
-		    	$scope.roleTreePable = false; // 角色树是否展示为父子级结构
 	    		// 初始化组织机构
 	    		roleTreeService.getRoleTree($scope, roleTreeService.showRoleTree);
 	    	}
@@ -183,7 +178,7 @@ define(['app','deptTreeService', 'permissionService', 'roleTreeService',
 	    				checkedNodeIds[index] = node.id;
 	    				checkedNodeNames[index] = node.name;
 	    			});
-	    			$scope.submitData.roleid = checkedNodeIds.join(",");
+	    			$scope.submitData.roleId = checkedNodeIds.join(",");
 	    			$scope.submitData.roleName = checkedNodeNames.join(",");
 	    			$scope.$apply();
 	    		}
@@ -222,9 +217,11 @@ define(['app','deptTreeService', 'permissionService', 'roleTreeService',
 	        		   name : '',
 	        		   beginTime: '', 
 	        		   endTime:'',
-	    			   deptid:''
+	    			   deptId:''
 	           }
 	    	   $scope.searchItem = angular.copy($scope.defaultSearchItem);
+	    	   $scope.roleTreeCheckable = true; // 角色设置展示的角色树是否显示复选框,即是否支持多选
+		       $scope.roleTreePable = false; // 角色树是否展示为父子级结构
 	    	   $scope.submitData = {};// 修改用户时选择的用户，也是添加时model绑定的，添加和编辑是一个页面
 	    	   $scope.buttonPermission = {
 					   add:false,
@@ -243,7 +240,7 @@ define(['app','deptTreeService', 'permissionService', 'roleTreeService',
 	   	    		      {field:'account', title: '账号', align: 'center', valign: 'middle', sort: true},
 	   	    		      {field:'name', title: '姓名', align: 'center', valign: 'middle', sort: true},
 	   	    		      {field:'sexName', title: '性别', align: 'center', valign: 'middle', sort: true},
-	   	    		      {field:'roleName', title: '角色', align: 'center', valign: 'middle', sort: true},
+	   	    		      {field:'roleName', title: '角色', width:180, align: 'center', valign: 'middle', sort: true},
 	   	    		      {field:'deptName', title: '部门', align: 'center', valign: 'middle', sort: true},
 	   	    		      {field:'email', title: '邮箱', width:180, align: 'center', valign: 'middle', sort: true},
 	   	    		      {field:'phone', title: '电话', align: 'center', valign: 'middle', sort: true},
@@ -314,7 +311,7 @@ define(['app','deptTreeService', 'permissionService', 'roleTreeService',
     	    */
 	       function checkDeptForSearch(event, treeId, treeNode) {
 	    	   if(null != treeNode){
-	    		   $scope.searchItem.deptid = treeNode.id;
+	    		   $scope.searchItem.deptId = treeNode.id;
 	    	   }
 		   }
 	       

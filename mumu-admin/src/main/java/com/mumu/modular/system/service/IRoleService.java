@@ -53,5 +53,10 @@ public interface IRoleService extends IService<Role> {
      * 根据角色名称获取角色信息
      */
     Role selectRoleByName(String name);
+    
+    /**
+     * 根据tip获取角色信息
+     */
+    Role selectRoleByTip(String tip);
 
 }

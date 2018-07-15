@@ -9,10 +9,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
 /**
+ * 
+ * 〈一句话功能简述〉<br> 
  * ehcache配置
  *
- * @author fengshuonan
- * @date 2017-05-20 23:11
+ * @author 88396254
+ * @date 2018年7月11日 下午3:07:51
+ * @see [相关类/方法]（可选）
+ * @since [产品/模块版本] （可选）
  */
 @Configuration
 @EnableCaching

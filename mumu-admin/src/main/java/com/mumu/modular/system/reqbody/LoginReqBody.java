@@ -29,7 +29,7 @@ public class LoginReqBody {
      * 验证码
      */
     private String kaptcha;
-
+    
     public String getAccount() {
         return account;
     }
@@ -61,5 +61,4 @@ public class LoginReqBody {
     public void setKaptcha(String kaptcha) {
         this.kaptcha = kaptcha;
     }
-    
 }

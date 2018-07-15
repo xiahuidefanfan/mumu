@@ -24,19 +24,18 @@
        	<li ng-repeat="title in titles">
        	
    	 		<a ui-sref-active="active" ui-sref="{{title.route}}" ng-if="title.children==undefined">
-	            <i class="fa ${title.icon}"></i>
+	            <i class="fa {{title.icon}}"></i>
 	            <span class="nav-label">{{title.name}}</span>
             </a>
             
-            <a ng-if="title.children.length>1" ng-click="changeTitle(title.name)">
-	            <i class="fa ${title.icon}"></i>
+            <a ng-if="title.children.length>0" ng-click="changeTitle(title.name)">
+	            <i class="fa {{title.icon}}"></i>
 	            <span class="nav-label">{{title.name}}</span>
 	            <span class="fa arrow"></span>
-            
             </a>
             <ul ng-class="{true:'nav nav-second-level display-ib', false: 'nav nav-second-level display-none'}
                           [title.name == currentTitle]"
-                ng-if="title.children.length>1">
+                ng-if="title.children.length>0">
                 <li ng-repeat="children in title.children">
                     <a ui-sref-active="active" ui-sref="{{children.route}}">{{children.name}}</a>
                 </li>

@@ -29,7 +29,7 @@ public class LogWarpper extends BaseControllerWarpper {
     public void warpTheMap(Map<String, Object> map) {
         String message = (String) map.get("message");
 
-        Integer userid = (Integer) map.get("userid");
+        String userid = String.valueOf(map.get("userid"));
         map.put("userName", ConstantFactory.me().getUserNameById(userid));
 
         //如果信息过长,则只截取前100位字符串
@@ -45,9 +45,8 @@ public class LogWarpper extends BaseControllerWarpper {
         }else{
             map.put("regularMessage",message);
         }
-        if(ToolUtil.isNotEmpty(map.get("createtime"))) {
-            map.put("createtime", DateUtil.formatDate((Date)map.get("createtime"),DateUtil.SECOND_FORMAT));
-        }
+        
+        map.put("createtime", DateUtil.formatDate((Date)map.get("createtime"),DateUtil.SECOND_FORMAT));
     }
 
 }

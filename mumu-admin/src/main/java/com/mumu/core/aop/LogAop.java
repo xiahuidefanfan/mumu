@@ -97,11 +97,10 @@ public class LogAop {
         //如果涉及到修改,比对变化
         String msg;
         if (bussinessName.indexOf(UPDATE) != -1 || bussinessName.indexOf(EDIT) != -1) {
-           
             msg = Contrast.contrastObj(dictClass, key, objOld, objNews[0]);
         } else {
             AbstractDictMap dictMap = (AbstractDictMap) dictClass.newInstance();
-            msg = Contrast.parseMutiKey(dictMap,key, objOld);
+            msg = Contrast.parseKey(dictMap,key, objOld);
         }
 
         LogManager.me().executeLog(LogTaskFactory.bussinessLog(user.getId(), bussinessName, className, methodName, msg));

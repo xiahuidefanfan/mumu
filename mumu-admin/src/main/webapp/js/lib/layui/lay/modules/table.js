@@ -235,9 +235,15 @@
                     "function" == typeof n.done && n.done(t, e, t[r.countName],a)
                 },
                 error: function(e, t) {
-                    a.layMain.html('<div class="' + f + '">数据接口请求异常</div>'),
-                    a.renderForm(),
-                    i && l.close(i)
+                	if(e.status == '401'){
+                		var currHref = window.location.href;
+		    			// 如果是登录问题，跳转到登录页面
+		    			window.location = '/login.html?returnRouter=' + currHref.substring(currHref.indexOf("#") + 1);
+					}else{
+						a.layMain.html('<div class="' + f + '">数据接口请求异常</div>'),
+	                    a.renderForm(),
+	                    i && l.close(i)
+					}
                 }
             })
         } else if (n.data && n.data.constructor === Array) {

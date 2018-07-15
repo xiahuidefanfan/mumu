@@ -65,12 +65,13 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
         return this.baseMapper.deleteRolesById(roleId);
     }
 
-    
-    /**
-     * 根据角色名称获取角色信息
-     */
+    @Override
     public Role selectRoleByName(String name) {
         return this.baseMapper.selectRoleByName(name);
     }
 
+    @Override
+    public Role selectRoleByTip(String tip) {
+        return this.baseMapper.selectRoleByTip(tip);
+    }
 }

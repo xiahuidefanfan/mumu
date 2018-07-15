@@ -27,7 +27,7 @@ public enum BizExceptionEnum implements ServiceExceptionEnum{
 	 * 权限和数据问题
 	 */
 	DB_RESOURCE_NULL(400,"数据库中没有该资源"),
-	NO_PERMITION(405, "权限异常"),
+	NO_PERMITION(405, "当前用户无操作权限"),
 	REQUEST_INVALIDATE(400,"请求数据格式不正确"),
 	INVALID_KAPTCHA(400,"验证码不正确"),
 	CANT_DELETE_ADMIN(600,"不能删除超级管理员"),
@@ -46,12 +46,12 @@ public enum BizExceptionEnum implements ServiceExceptionEnum{
 	/**
 	 * 角色问题
 	 */
-	ROLE_ALREADY_EXISTED(401,"该角色名已经存在！"),
+	ROLE_ALREADY_EXISTED(401,"该角色已经存在！"),
 	
 	/**
      * 部门问题
      */
-    DEPT_ALREADY_EXISTED(401,"该角色名已经存在！"),
+    DEPT_ALREADY_EXISTED(401,"该部门已经存在！"),
 
 	/**
 	 * 错误的请求
@@ -61,8 +61,16 @@ public enum BizExceptionEnum implements ServiceExceptionEnum{
 	DICT_MUST_BE_NUMBER(400,"字典的值必须为数字！"),
 	REQUEST_NULL(400, "请求有错误！"),
 	SESSION_TIMEOUT(400, "会话超时！"),
-	SERVER_ERROR(500, "服务器异常！");
-
+	SERVER_ERROR(500, "服务器异常！"),
+    
+    /**
+     * 流程相关
+     */
+     TASK_IS_NOT_EXISTED(400,"任务不存在"),
+     TASK_HAS_NO_ASSIGNEE(400,"任务无处理人"),
+     TASK_CAN_NOT_UPDATE(400,"流程已启动，不可修改！");
+    
+    
 	BizExceptionEnum(int code, String message) {
 		this.code = code;
 		this.message = message;

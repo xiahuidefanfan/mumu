@@ -41,5 +41,10 @@ public interface RoleMapper extends BaseMapper<Role> {
      * 根据角色名称获取角色信息
      */
     Role selectRoleByName(@Param("name") String name);
+    
+    /**
+     * 根据tip获取角色信息
+     */
+    Role selectRoleByTip(@Param("tip") String tip);
 
 }

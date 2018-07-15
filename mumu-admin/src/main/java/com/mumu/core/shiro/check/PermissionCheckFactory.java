@@ -23,7 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mumu.core.listener.ConfigListener;
 import com.mumu.core.shiro.ShiroKit;
-import com.mumu.core.shiro.ShiroUser;
 import com.mumu.core.support.CollectionKit;
 import com.mumu.core.support.HttpKit;
 import com.mumu.core.util.SpringContextHolder;
@@ -42,10 +41,6 @@ public class PermissionCheckFactory implements ICheck {
 
     @Override
     public boolean check(Object[] permissions) {
-        ShiroUser user = ShiroKit.getUser();
-        if (null == user) {
-            return false;
-        }
         String roles = CollectionKit.join(permissions, ",");
         if (ShiroKit.hasAnyRoles(roles)) {
             return true;
@@ -56,10 +51,6 @@ public class PermissionCheckFactory implements ICheck {
     @Override
     public boolean checkAll() {
         HttpServletRequest request = HttpKit.getRequest();
-        ShiroUser user = ShiroKit.getUser();
-        if (null == user) {
-            return false;
-        }
         String requestURI = request.getRequestURI().replaceFirst(ConfigListener.getConf().get("contextPath"), "");
         String[] str = requestURI.split("/");
         if (str.length > 3) {

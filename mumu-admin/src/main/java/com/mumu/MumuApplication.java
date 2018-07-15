@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * 
@@ -15,6 +16,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since [产品/模块版本] （可选）
  */
 @SpringBootApplication
+@ComponentScan
 public class MumuApplication {
 
     private final static Logger logger = LoggerFactory.getLogger(MumuApplication.class);

@@ -1,0 +1,46 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="ibox float-e-margins">
+		<div class="ibox-content">
+			<div class="form-horizontal bv-form" >
+				<div class="row" ng-form="editForm">
+					<div class="col-sm-12 b-r">
+						<div ng-class="{'form-group': true, 'has-feedback': true, 
+						                'has-error': editForm.money.$error.required 
+											      && editForm.money.$dirty}">
+							<label class="col-sm-3 control-label">报销金额</label>
+							<div class="col-sm-9">
+								<input class="form-control"	ng-model="submitData.money" name="money" required>
+								<small style="display: block;color: #ed5565"
+									   ng-if="editForm.money.$error.required 
+							       		   && editForm.money.$dirty">报销金额不能为空
+								</small>
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+						
+						<div class="form-group has-feedback">
+						    <label class="col-sm-3 control-label">报销描述</label>
+							<div class="col-sm-9">
+								<input class="form-control"	ng-model="submitData.expenseDesc">
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+					</div>
+					
+				</div>
+				<div class="row btn-group-m-t">
+					<div class="col-sm-10">
+						<button type="button" class="btn btn-success dialog-btn"
+							ng-click="addSubmit()" id="ensure">
+							<i class="fa fa-check"></i>&nbsp;提交
+						</button>
+						<button type="button" class="btn btn-danger dialog-btn"
+							ng-click="closeLayer()" id="cancel">
+							<i class="fa fa-eraser"></i>&nbsp;取消
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

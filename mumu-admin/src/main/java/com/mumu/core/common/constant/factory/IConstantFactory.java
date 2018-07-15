@@ -18,7 +18,7 @@ public interface IConstantFactory {
      * @author stylefeng
      * @Date 2017/5/9 23:41
      */
-    String getUserNameById(Integer userId);
+    String getUserNameById(String userId);
 
     /**
      * 根据用户id获取用户账号
@@ -36,12 +36,12 @@ public interface IConstantFactory {
     /**
      * 通过角色id获取角色名称
      */
-    String getSingleRoleName(Integer roleId);
+    String getSingleRoleName(String roleId);
 
     /**
      * 通过角色id获取角色英文名称
      */
-    String getSingleRoleTip(Integer roleId);
+    String getSingleRoleTip(String roleId);
 
     /**
      * 获取部门名称

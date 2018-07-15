@@ -8,11 +8,12 @@ import com.mumu.core.shiro.ShiroUser;
 import com.mumu.modular.system.model.User;
 
 /**
- * 定义shirorealm所需数据的接口
+ *  定义shirorealm所需数据的接口
  *
- * @author fengshuonan
- * @date 2016年12月5日 上午10:23:34
+ * @author 88396254
+ * @date 2018年6月27日 上午11:18:23
  */
+ 
 public interface IShiro {
 
     /**
@@ -34,14 +35,14 @@ public interface IShiro {
      *
      * @param roleId 角色id
      */
-    List<String> findPermissionsByRoleId(Integer roleId);
+    List<String> findPermissionsByRoleId(String roleId);
 
     /**
      * 根据角色id获取角色名称
      *
      * @param roleId 角色id
      */
-    String findRoleNameByRoleId(Integer roleId);
+    String findRoleNameByRoleId(String roleId);
 
     /**
      * 获取shiro的认证信息

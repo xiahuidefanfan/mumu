@@ -30,6 +30,7 @@
 									<option value="1" ng-selected="submitData.sex == 1">男</option>
 									<option value="2" ng-selected="submitData.sex == 2">女</option>
 								</select>
+								
 								<small style="display: block;color:#ed5565"
 									   ng-if="editForm.sex.$error.required 
 							       		   && editForm.sex.$dirty">请选择性别
@@ -189,11 +190,11 @@
 				</div>
 				<div class="row btn-group-m-t">
 					<div class="col-sm-10">
-						<button type="button" class="btn btn-info "
+						<button type="button" class="btn btn-success dialog-btn "
 							ng-click="addSubmit()" id="ensure">
 							<i class="fa fa-check"></i>&nbsp;提交
 						</button>
-						<button type="button" class="btn btn-danger "
+						<button type="button" class="btn btn-danger dialog-btn"
 							ng-click="closeLayer()" id="cancel">
 							<i class="fa fa-eraser"></i>&nbsp;取消
 						</button>

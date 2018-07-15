@@ -24,6 +24,11 @@ public interface IUserService extends IService<User>{
     User getByAccount(String account);
     
     /**
+     * 根据角色获取用户
+     */
+    List<Map<String, Object>> getByRoleId(String roleId);
+    
+    /**
      * 根据条件查询用户列表
      */
     List<Map<String, Object>> selectUsers(Page<User> page, UserSerachCondition condition);
@@ -42,6 +47,5 @@ public interface IUserService extends IService<User>{
      * 设置用户的角色
      */
     int setRoles(String userId, String roleIds);
-
 
 }

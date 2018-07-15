@@ -13,10 +13,14 @@ import com.mumu.core.common.constant.dictmap.factory.DictFieldWarpperFactory;
 import com.mumu.core.support.StrKit;
 
 /**
- * 对比两个对象的变化的工具类
+ * 
+ * 〈一句话功能简述〉<br> 
+ *  对比两个对象的变化的工具类
  *
- * @author fengshuonan
- * @Date 2017/3/31 10:36
+ * @author 88396254
+ * @date 2018年6月25日 上午10:43:55
+ * @see [相关类/方法]（可选）
+ * @since [产品/模块版本] （可选）
  */
 public class Contrast {
 
@@ -81,7 +85,7 @@ public class Contrast {
             Class clazz = objOld.getClass();
             Field[] fields = objOld.getClass().getDeclaredFields();
             int i = 1;
-            str = parseMutiKey(dictMap, key, objOld);
+            str = parseKey(dictMap, key, objOld);
             
             for (Field field : fields) {
                 if ("serialVersionUID".equals(field.getName())) {
@@ -120,22 +124,22 @@ public class Contrast {
      * 解析多个key(逗号隔开的)
      */
     @SuppressWarnings("unchecked")
-    public static String parseMutiKey(AbstractDictMap dictMap, String key, Object obj) throws IntrospectionException, 
+    public static String parseKey(AbstractDictMap dictMap, String key, Object obj) throws IntrospectionException, 
         IllegalAccessException, InvocationTargetException{
         if(obj instanceof List) {
             StringBuilder sb = new StringBuilder();
             List<Object> objs = (List<Object>)obj;
             for(int i= 0; i < objs.size(); i++) {
-                sb.append(parseSimpleKey(dictMap, key, objs.get(i)));
+                sb.append(parseSimpleObj(dictMap, key, objs.get(i)));
             }
             return sb.toString();
         }else {
-            return parseSimpleKey(dictMap, key, obj);
+            return parseSimpleObj(dictMap, key, obj);
         }
     }
     
     @SuppressWarnings("rawtypes")
-    private static String parseSimpleKey(AbstractDictMap dictMap, String key, Object obj) throws IntrospectionException, 
+    private static String parseSimpleObj(AbstractDictMap dictMap, String key, Object obj) throws IntrospectionException, 
         IllegalAccessException, InvocationTargetException{
         Class clazz = obj.getClass();
         String[] keys = key.split(KEY_SEPARATOR);

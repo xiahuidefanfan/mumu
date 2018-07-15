@@ -28,8 +28,8 @@ public class UserWarpper extends BaseControllerWarpper {
     @Override
     public void warpTheMap(Map<String, Object> map) {
         map.put("sexName", ConstantFactory.me().getSexName((Integer) map.get("sex")));
-        map.put("roleName", ConstantFactory.me().getRoleName((String) map.get("roleid")));
-        map.put("deptName", ConstantFactory.me().getDeptName(map.get("deptid").toString()));
+        map.put("roleName", ConstantFactory.me().getRoleName((String) map.get("roleId")));
+        map.put("deptName", ConstantFactory.me().getDeptName(map.get("deptId").toString()));
         map.put("statusName", ConstantFactory.me().getStatusName((Integer) map.get("status")));
         if(ToolUtil.isNotEmpty(map.get("birthday"))) {
             map.put("birthday", DateUtil.formatDate((Date)map.get("birthday"),DateUtil.DAY_FORMAT));

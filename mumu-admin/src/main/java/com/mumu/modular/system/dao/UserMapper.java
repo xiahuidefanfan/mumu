@@ -23,7 +23,9 @@ import com.mumu.modular.system.model.User;
 @Mapper
 public interface UserMapper extends BaseMapper<User>{
     
-    User getByAccount(String account);
+    User getByAccount(@Param("account") String account);
+    
+    List<Map<String, Object>> getByRoleId(@Param("roleId") String roleId);
     
     List<Map<String, Object>> selectUsers(@Param("page")Page<User> page,@Param("condition")UserSerachCondition condition);
     

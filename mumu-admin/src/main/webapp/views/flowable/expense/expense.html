@@ -1,0 +1,49 @@
+<div class="row" ng-controller="expenseController">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>报销流程</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-3">
+								<div class="input-group">
+									<div class="input-group-btn">
+										<button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">名称
+										</button>
+									</div>
+									<input type="text" class="form-control" placeholder="请输入描述" ng-model="searchItem.name">
+								</div>                            
+							</div>
+							<div class="col-sm-3">
+								<button type="button" class="btn btn-primary " ng-click="reloadTable()">
+									<i class="fa fa-search"></i>&nbsp;搜索
+								</button>
+								<button type="button" class="btn btn-primary " ng-click="clear()">
+									<i class="fa fa-refresh"></i>&nbsp;清除
+								</button>
+							</div>
+						</div>
+                        
+						<div class="fixed-table-toolbar mt-10">
+							<div class="bs-bars pull-left">
+								<div class="hidden-xs" role="group">
+									<button type="button" class="btn btn-primary " ng-click="openAdd()">
+										<i class="fa fa-plus"></i>&nbsp;新增报销单
+									</button>
+									<button type="button" class="btn btn-primary button-margin" ng-click="deleteExpense()">
+										<i class="fa fa-minus"></i>&nbsp;删除报销单
+									</button>
+								</div>
+							</div>
+						</div>
+						<div class="fixed-table-container pt-38">
+							<table class="layui-hide"  lay-filter="enpense_table"></table> 
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -17,7 +17,7 @@ define([ 'app', 'ajaxService', 'urlConstants' ], function(app) {
 	    			zNode.pId = dept.pid;
 	    			zNode.name = dept.simplename;
 	    			zNode.fullname = dept.fullname;
-	    			zNode.open = dept.pid == dept.id ? true : false;
+	    			zNode.open = true;
 	    			zNodes[index] = zNode;
 	    		});
 	    		if(callback){

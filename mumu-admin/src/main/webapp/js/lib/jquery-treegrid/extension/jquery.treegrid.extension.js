@@ -122,8 +122,8 @@
 			var tbody = $('<tbody class="treegrid-tbody"></tbody>');
 			target.append(tbody);
 			// 添加加载loading
-			var _loading = '<tr><td colspan="'+options.columns.length+'"><div style="display: block;text-align: center;">正在努力地加载数据中，请稍候……</div></td></tr>'
-			tbody.html(_loading);
+			// var _loading = '<tr><td colspan="'+options.columns.length+'"><div style="display: block;text-align: center;">数据中，请稍候……</div></td></tr>'
+			tbody.html("");
 			// 默认高度
 			if(options.height){
 				tbody.css("height",options.height);
@@ -194,9 +194,14 @@
 					});
 				},
 			    error:function(xhr,textStatus){
-					var _errorMsg = '<tr><td colspan="'+options.columns.length+'"><div style="display: block;text-align: center;">'+xhr.responseText+'</div></td></tr>'
-					tbody.html(_errorMsg);
-					debugger;
+		    		if(xhr.status == '401'){
+		    			var currHref = window.location.href;
+		    			// 如果是登录问题，跳转到登录页面
+		    			window.location = '/login.html?returnRouter=' + currHref.substring(currHref.indexOf("#"));
+					}else{
+						var _errorMsg = '<tr><td colspan="'+options.columns.length+'"><div style="display: block;text-align: center;">'+数据接口请求异常+'</div></td></tr>'
+						tbody.html(_errorMsg);
+					}
 			    },
 			});
 		}

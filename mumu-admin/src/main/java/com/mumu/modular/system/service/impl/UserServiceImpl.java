@@ -30,6 +30,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
+    public List<Map<String, Object>> getByRoleId(String roleId){
+        return this.baseMapper.getByRoleId(roleId);
+    }
+    
+    @Override
     public List<Map<String, Object>> selectUsers(Page<User> page, UserSerachCondition condition) {
         return this.baseMapper.selectUsers(page, condition);
     }

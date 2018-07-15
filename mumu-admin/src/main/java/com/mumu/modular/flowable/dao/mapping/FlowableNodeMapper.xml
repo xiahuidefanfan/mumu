@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mumu.modular.flowable.dao.FlowableNodeMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.mumu.modular.flowable.model.FlowableNode">
+		<id column="id" property="id" />
+		<result column="procDefId" property="procDefId" />
+		<result column="position" property="position" />
+		<result column="canBackTo" property="canBackTo" />
+		<result column="canRollBack" property="canRollBack" />
+		<result column="nodeName" property="nodeName" />
+		<result column="nodeCode" property="nodeCode" />
+		<result column="nodeDesc" property="nodeDesc" />
+		<result column="orderNum" property="orderNum" />
+		<result column="createtime" property="createtime" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, procDefId, position, canBackTo, canRollBack, nodeCode, nodeName, orderNum, createtime, nodeDesc
+    </sql>
+    
+    <select id="selectFlowableNodes" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
+		select
+		<include refid="Base_Column_List" />
+		from sys_flowable_node
+		where 1 = 1
+		<if test="name != null and name != ''">
+			and (procdefId like CONCAT('%',#{name},'%')
+			or nodeCode like CONCAT('%',#{name},'%')
+			or nodeName like CONCAT('%',#{name},'%'))
+		</if>
+		order by createTime desc
+	</select>
+    <select id="getCanRollBackTaskIds" resultType="map">
+		SELECT id,nodeCode,nodeName
+		FROM sys_flowable_node 
+		WHERE orderNum &lt; All(select orderNum from sys_flowable_node where 
+						      nodeCode = #{nodeCode} AND procdefId = #{procDefId})
+		AND canBackTo = 1
+		AND POSITION != 2
+		AND procdefId = #{procDefId}
+	</select>
+	<select id="getFlowableNode" resultType="map">
+		select
+			<include refid="Base_Column_List" />
+		FROM sys_flowable_node 
+		WHERE nodeCode = #{nodeCode} AND procdefId = #{procDefId}
+	</select>
+	
+</mapper>

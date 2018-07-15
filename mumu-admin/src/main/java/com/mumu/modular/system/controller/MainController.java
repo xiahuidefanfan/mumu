@@ -40,7 +40,7 @@ public class MainController {
     @RequestMapping("/initMain")
     @ResponseBody
     public RespData initMain() {
-        List<Integer> roleList = ShiroKit.getUser().getRoleList();
+        List<String> roleList = ShiroKit.getUser().getRoleList();
         // 根据权限获取菜单列表
         List<MenuNode> menus = menuService.getMenusByRoleIds(roleList);
         List<MenuNode> titles = MenuNode.buildTitle(menus);

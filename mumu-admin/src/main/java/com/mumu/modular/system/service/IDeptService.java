@@ -25,7 +25,7 @@ public interface IDeptService extends IService<Dept> {
     void deleteDept(Integer deptId);
 
     /**
-     * 获取所有部门列表
+     * 获取部门列表
      */
     List<Map<String, Object>> list(@Param("condition") String condition);
     

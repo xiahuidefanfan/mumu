@@ -1,5 +1,6 @@
 define(['app', 'ajaxService', 'dialogFactory'], function(app) {
-	app.service('operateUtil', ['ajaxService', 'dialogFactory', 'layer', function (ajaxService, dialogFactory, layer) {
+	app.service('operateUtil', ['ajaxService', 'dialogFactory', 'layer', '$compile','$interval', 
+			function (ajaxService, dialogFactory, layer, $compile, $interval) {
 		var me = this;
 		
 		/**
@@ -39,29 +40,14 @@ define(['app', 'ajaxService', 'dialogFactory'], function(app) {
 		 */
 		me.doConfirm = function(obj){
 			me.scope = obj.scope
-			var checkStatus = me.scope.table.checkStatus('listReload');
 			var requsetParam = [];
 			// 操作是否需要先选中数据
 			if(!obj.noNeedCheckd){
-	    		// 有且只能选中一条记录进行修改
-	    		if(!obj.multiple){
-	    			if(checkStatus.data.length != 1){
-	    				dialogFactory.info("请先选中表格中的某一记录！");
-	    				throw new Error();  
-	    			}else{
-	    				requsetParam = checkStatus.data[0].id;
-	    			}
-	    		}else{
-	    			if(checkStatus.data.length >= 1){
-	    				angular.forEach(checkStatus.data, function(item, index){
-	    					requsetParam[index] = item.id;
-	    				});
-	    				
-	    			}else{
-	    				dialogFactory.info("请先选中表格中的记录！");
-	    				throw new Error();  
-	    			}
-	    		}
+				if(obj.tableType == 'tree'){
+					requsetParam = confirmCheckTreeTable(obj);
+				}else{
+					requsetParam = confirmCheckNormalTable(obj);
+				}
 			}
     		// 将选中的记录设置成待修改的元素
     		dialogFactory.confirm (obj.msg, function(){
@@ -69,28 +55,11 @@ define(['app', 'ajaxService', 'dialogFactory'], function(app) {
 					dealSuccessResult,
 					dealErrorResult
         		)},
-        		function(){
-        			me.scope.clearSelected();
+        		function(index){
+                	me.scope.closeLayer();
         		}
     		  
     		);
-		}
-		
-		/**
-		 * 响应200时处理逻辑
-		 */
-		 function dealSuccessResult(result){
-			dialogFactory.success(result.message);
-			me.scope.reloadTable();
-			me.scope.clearSelected();
-		}
-		
-		/**
-		 * 系统错误时（响应非200）
-		 */
-		 function dealErrorResult(result){
-			 dialogFactory.error(result.message);
-			 me.scope.clearSelected();
 		}
 		
 		/**
@@ -100,12 +69,11 @@ define(['app', 'ajaxService', 'dialogFactory'], function(app) {
 		me.openLayer = function (obj, callback){
 			me.scope = obj.scope;
 			if(obj.setChosed){
-				
 				if(obj.tableType == 'tree'){
 					// 树形table获取选中值
 					if(!me.scope.table.bootstrapTreeTable('getSelections')[0]){
 						dialogFactory.info("请先选中表格中的某一记录！");
-		    	        return false;
+						return false;
 					}
 					// 先获取选中记录的id
 					var id = me.scope.table.bootstrapTreeTable('getSelections')[0].id;
@@ -113,7 +81,7 @@ define(['app', 'ajaxService', 'dialogFactory'], function(app) {
 					angular.forEach(me.scope.table.cacheRootNodes, function(item){
 						if(item.id == id){
 							me.scope.submitData = angular.copy(item);
-							return false;
+							return false; 
 						}
 					});
 		    		
@@ -123,7 +91,7 @@ define(['app', 'ajaxService', 'dialogFactory'], function(app) {
 		    		// 有且只能选中一条记录进行修改
 		    		if(checkStatus.data.length != 1){
 		    			dialogFactory.info("请先选中表格中的某一记录！");
-		    	        return false;
+		    			return false;
 		    		}
 		    		// 将选中的记录设置成待修改的元素
 		    		me.scope.submitData = angular.copy(checkStatus.data[0]);
@@ -137,8 +105,7 @@ define(['app', 'ajaxService', 'dialogFactory'], function(app) {
                 contentUrl: '',
                 btn:"",
                 scope : me.scope,
-                cancel:function(index){
-                	layer.close(index);
+                cancel:function(){
                 	me.scope.closeLayer();
                 },
                 success:function(){
@@ -164,6 +131,102 @@ define(['app', 'ajaxService', 'dialogFactory'], function(app) {
     		}
     		me.scope.submitData = angular.copy(checkStatus.data[0]);
 			dialogFactory.infoDetail(title, scope.submitData[field]);
+		}
+		
+		/**
+		 * 按钮编译
+		 */
+		me.compileButton = function(scope){
+			me.scope = scope;
+			if(me.scope.timer){
+				return;
+			}
+		    // layui表格渲染的dom需要主动编译，否则按钮点击事件将失效
+			me.scope.timer = $interval(function(){
+			   if($(".operationBtn").length > 0){
+				    $interval.cancel(me.scope.timer);
+				    // 重新编译dom
+			        angular.forEach($(".operationBtn"),function(element){
+					   $compile(element)(me.scope);  
+				    })
+				    delete me.scope.timer;
+			   }
+		   }, 200);
+		}
+		
+		/**
+		 * 响应200时处理逻辑
+		 */
+		 function dealSuccessResult(result){
+			dialogFactory.success(result.message);
+			me.scope.reloadTable();
+			me.scope.clearSelected();
+		}
+		
+		/**
+		 * 系统错误时（响应非200）
+		 */
+		 function dealErrorResult(result){
+			 dialogFactory.error(result.message);
+			 me.scope.clearSelected();
+		}
+		 
+		 /**
+		  * confirm 操作时检查是否选中记录-树形表
+		  */
+		 function confirmCheckTreeTable(obj){
+			 var data = me.scope.table.bootstrapTreeTable('getSelections');
+			 var requsetParam = [];
+			 if(!obj.multiple){
+				// 树形table获取选中值
+				if(data.length != 1){
+					dialogFactory.info("请先选中表格中的某一记录！");
+					throw new Error();  
+				}else{
+					requsetParam = me.scope.table.bootstrapTreeTable('getSelections')[0].id;
+					return requsetParam;
+				}
+			 }else{
+				if(data.length >= 1){
+    				angular.forEach(data, function(item, index){
+    					requsetParam[index] = item.id;
+    				});
+    				
+    				return requsetParam;
+    			}else{
+    				dialogFactory.info("请先选中表格中的记录！");
+    				throw new Error();  
+    			}
+			 }
+		 }
+		 
+		 /**
+		  * confirm 操作时检查是否选中记录-普通表
+		  */
+		 function confirmCheckNormalTable(obj){
+			var checkStatus = me.scope.table.checkStatus('listReload');
+			var requsetParam = [];
+			// 有且只能选中一条记录进行修改
+    		if(!obj.multiple){
+    			if(checkStatus.data.length != 1){
+    				dialogFactory.info("请先选中表格中的某一记录！");
+    				throw new Error();  
+    			}else{
+    				requsetParam = checkStatus.data[0].id;
+    				return requsetParam;
+    			}
+    		}else{
+    			if(checkStatus.data.length >= 1){
+    				angular.forEach(checkStatus.data, function(item, index){
+    					requsetParam[index] = item.id;
+    				});
+    				return requsetParam;
+    				
+    			}else{
+    				dialogFactory.info("请先选中表格中的记录！");
+    				throw new Error();  
+    			}
+    		}
 		}
 		
 	}]);

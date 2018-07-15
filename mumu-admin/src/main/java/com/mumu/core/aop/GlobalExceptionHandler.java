@@ -53,7 +53,7 @@ public class GlobalExceptionHandler extends BaseController{
         LogManager.me().executeLog(LogTaskFactory.exceptionLog(ShiroKit.getUser().getId(), e));
         getRequest().setAttribute("tip", e.getMessage());
         log.error("业务异常:", e);
-        return RespData.getRespData(e.getCode(), null , e.getMessage());
+        return RespData.getRespData(HttpStatus.INTERNAL_SERVER_ERROR.value(), null , e.getMessage());
     }
 
     /**
@@ -61,9 +61,10 @@ public class GlobalExceptionHandler extends BaseController{
      */
     @ExceptionHandler(AuthenticationException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    public String unAuth(AuthenticationException e) {
+    @ResponseBody
+    public RespData unAuth(AuthenticationException e) {
         log.error("用户未登陆：", e);
-        return "/login.html";
+        return RespData.getRespData(HttpStatus.UNAUTHORIZED.value(), null , "用户未登陆！");
     }
 
     /**
@@ -71,11 +72,11 @@ public class GlobalExceptionHandler extends BaseController{
      */
     @ExceptionHandler(DisabledAccountException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    public String accountLocked(DisabledAccountException e, Model model) {
+    public RespData accountLocked(DisabledAccountException e, Model model) {
         String username = getRequest().getParameter("username");
         LogManager.me().executeLog(LogTaskFactory.loginLog(username, "账号被冻结", getIp()));
         model.addAttribute("tips", "账号被冻结");
-        return "/login.html";
+        return RespData.getRespData(HttpStatus.UNAUTHORIZED.value(), null , "账号被冻结！");
     }
 
     /**
@@ -96,11 +97,11 @@ public class GlobalExceptionHandler extends BaseController{
      */
     @ExceptionHandler(InvalidKaptchaException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String credentials(InvalidKaptchaException e, Model model) {
+    public RespData credentials(InvalidKaptchaException e, Model model) {
         String username = getRequest().getParameter("username");
         LogManager.me().executeLog(LogTaskFactory.loginLog(username, "验证码错误", getIp()));
         model.addAttribute("tips", "验证码错误");
-        return "/login.html";
+        return RespData.getRespData(HttpStatus.BAD_REQUEST.value(), null, "验证码错误！");
     }
 
     /**
@@ -110,7 +111,6 @@ public class GlobalExceptionHandler extends BaseController{
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ResponseBody
     public RespData credentials(UndeclaredThrowableException e) {
-        getRequest().setAttribute("tip", "权限异常！");
         log.error("权限异常!", e);
         return RespData.getRespData(HttpStatus.UNAUTHORIZED.value(), null, 
                 BizExceptionEnum.NO_PERMITION.getMessage());

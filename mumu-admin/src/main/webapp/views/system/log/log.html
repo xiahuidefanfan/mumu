@@ -58,13 +58,16 @@
 							</div>
 						</div>
 						<div class="hidden-xs mt-10">
-							<button type="button" class="btn btn-primary " ng-click="openDetail()">
+							<button type="button" class="btn btn-primary " ng-click="openDetail()"
+								ng-if="buttonPermission.detail">
 								<i class="fa fa-file-text"></i>&nbsp;查看详情
 							</button>
-							<button type="button" class="btn btn-primary button-margin" ng-click="deleteLog()">
+							<button type="button" class="btn btn-primary button-margin" ng-click="deleteLog()"
+								ng-if="buttonPermission.delete">
 									<i class="fa fa-minus"></i>&nbsp;删除日志
 							</button>
-							<button type="button" class="btn btn-primary button-margin" ng-click="deleteAllLog()">
+							<button type="button" class="btn btn-primary button-margin" ng-click="deleteAllLog()"
+								ng-if="buttonPermission.deleteAll">
 								<i class="fa fa-trash-o"></i>&nbsp;清空日志
 							</button>
 						</div>

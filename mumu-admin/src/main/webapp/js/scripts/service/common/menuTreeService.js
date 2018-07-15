@@ -8,7 +8,7 @@ define([ 'app','ajaxService','urlConstants', 'jquery.excheck' ], function(app) {
 		 */
 		me.getAuthorityTree = function(scope){
 			 me.scope = scope;
-			 var zNodes = [];// 部门树节点数据 
+			 var zNodes = [];// 菜单树节点数据 
 			 ajaxService.ajaxPost(urlConstants.ROLE_AUTHORITY_URL, me.scope.submitData).then(function(result){
 	    		 angular.forEach(result.data.menus, function(menu, index){
 	    			var zNode = {};
@@ -24,7 +24,13 @@ define([ 'app','ajaxService','urlConstants', 'jquery.excheck' ], function(app) {
 	    			});
 	    			zNodes[index] = zNode;
 	    		});
-	    		 showMenuTree(zNodes);
+	    		 $.fn.zTree.init($("#menuTree"), me.getMenuZNodeSetting(me.scope.chooseMenuTree), zNodes);
+	        		$("#menuMenu").css({
+	        	        'position': 'absolute',
+	    	    	    'left': '104px',
+	    	    	    'top': '34px',
+	    	    	    'z-index': '9999'
+	        	    }).slideDown("fast");
 			});
 		}
 		
@@ -34,7 +40,7 @@ define([ 'app','ajaxService','urlConstants', 'jquery.excheck' ], function(app) {
 		 */
 		me.getMenuTree = function(scope){
 			 me.scope = scope;
-			 var zNodes = [];// 部门树节点数据 
+			 var zNodes = [];// 菜单树节点数据 
 			 ajaxService.ajaxPost(urlConstants.MENU_LIST_URL, me.scope.submitData).then(function(result){
 	    		 angular.forEach(result.data, function(menu, index){
 	    			var zNode = {};
@@ -50,7 +56,7 @@ define([ 'app','ajaxService','urlConstants', 'jquery.excheck' ], function(app) {
 		}
 		
 		/**
-		 * 展示部门树实现方法
+		 * 展示菜单树实现方法
 		 */
 		 function showMenuTree(zNodes){
        		$.fn.zTree.init($("#menuTree"), me.getMenuZNodeSetting(me.scope.chooseMenuTree), zNodes);
@@ -64,7 +70,7 @@ define([ 'app','ajaxService','urlConstants', 'jquery.excheck' ], function(app) {
 		}
 		 
 		 /**
-    	 * 添加、编辑页面-隐藏部门选择的树
+    	 * 添加、编辑页面-隐藏菜单选择的树
     	 */
     	function hideMenuSelectTree() {
     	    $("#menuMenu").fadeOut("fast");
@@ -72,11 +78,11 @@ define([ 'app','ajaxService','urlConstants', 'jquery.excheck' ], function(app) {
     	}
     	
     	/**
-    	 * 添加、编辑页面-鼠标事件，用于显隐部门树
+    	 * 添加、编辑页面-鼠标事件，用于显隐菜单树
     	 */
     	function hideMenuTree(event) {
-    		if(!me.scope.submitData || !me.scope.submitData.deptid){
-    			me.scope.editForm.name.$dirty = true;
+    		if(!me.scope.submitData || !me.scope.submitData.pcode){
+    			me.scope.editForm.pcodeName.$dirty = true;
     			me.scope.$apply();
     		}
     	    if (!(event.target.id == "menuBtn" || event.target.id == "menuMenu" || $(

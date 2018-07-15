@@ -42,7 +42,6 @@ public class DeptController extends BaseController{
     @Autowired
     private IDeptService deptService;
     
-
     @RequestMapping(value="/list", method = RequestMethod.POST)
     @ResponseBody
     @Permission(Const.ADMIN_NAME)
@@ -75,7 +74,7 @@ public class DeptController extends BaseController{
         // 查重
         Dept theDept = deptService.selectDeptByName(dept.getSimplename());
         Dept oldDept = dept.selectById();
-        if (oldDept != null && !theDept.getId().equals(oldDept.getId())) {
+        if (oldDept != null && theDept != null && !theDept.getId().equals(oldDept.getId())) {
             throw new MumuException(BizExceptionEnum.DEPT_ALREADY_EXISTED);
         }
         

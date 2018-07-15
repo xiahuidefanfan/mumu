@@ -208,7 +208,7 @@ public class UserMgrController extends BaseController {
         }
         List<String> deptDataScope = ShiroKit.getDeptDataScope();
         User user = this.userService.selectById(userId);
-        String deptid = user.getDeptid();
+        String deptid = user.getDeptId();
         if (deptDataScope.contains(deptid)) {
             return;
         } else {

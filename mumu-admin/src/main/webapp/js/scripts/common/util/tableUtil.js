@@ -1,5 +1,5 @@
 define(['app'], function(app) {
-	app.service('tableUtil', function () {
+	app.service('tableUtil',['$compile', function ($compile) {
 		var me = this;
 		/**
 		 * 获取table配置
@@ -39,9 +39,13 @@ define(['app'], function(app) {
 		 * 重载表格
 		 */
 		me.reloadTable = function (scope) {
-     		scope.table.reload("listReload", { //此处是上文提到的 初始化标识id
-     			where: scope.searchItem
-     		});
+			try {  
+				scope.table.reload("listReload", { //此处是上文提到的 初始化标识id
+	     			where: scope.searchItem
+	     		});
+ 			} catch(e) {  
+ 				console.info(e);
+ 			}  
      	}
     
 		/**
@@ -57,6 +61,19 @@ define(['app'], function(app) {
      			});
      		}
      	}
+     	
+    	/**
+		 * 普通表格设置submitData，主要用于工作流模块
+		 */
+		me.setSubmitData = function(scope, id){
+			me.scope = scope;
+			angular.forEach(scope.table.cache.listReload, function(item){
+  				if(item.id == id){
+  					me.scope.submitData = angular.copy(item);
+  					return false; 
+  				}
+  			});
+		}
 		
-	});
+	}]);
 });

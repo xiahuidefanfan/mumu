@@ -91,7 +91,7 @@ public class RoleController extends BaseController {
         // 查重
         Role theRole = roleService.selectRoleByName(role.getName());
         Role oldRole = role.selectById();
-        if (oldRole != null && !theRole.getId().equals(oldRole.getId())) {
+        if (oldRole != null && theRole != null && !theRole.getId().equals(oldRole.getId())) {
             throw new MumuException(BizExceptionEnum.ROLE_ALREADY_EXISTED);
         }
         // 用于记录日志

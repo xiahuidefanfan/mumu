@@ -37,6 +37,14 @@
             and levels = #{level}
         </if>
     </select>
+    
+    <select id="selectMenuByCode" resultType="menu">
+        select
+        <include refid="Base_Column_List" />
+        from sys_menu
+        where status = 1
+       	and code = #{code}
+    </select>
 
     <select id="getMenuIdsByRoleId" resultType="long">
         select menuid from

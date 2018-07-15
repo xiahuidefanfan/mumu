@@ -32,7 +32,7 @@ body{
 .assign-btn{
     position: relative;
     bottom: 16px;
-    left: 52px;
+    left: 12px;
 }
 
 .wd-36{
@@ -117,3 +117,20 @@ body{
 	font-weight: 600;
  }
 
+.col-sm-10{
+	width:100% !important;
+	
+}
+
+.operationBtn{
+    padding: 3px 8px 5px 8px !important;
+}
+
+.dialog-btn{
+	float: right;
+    margin-right: 12px;
+}
+
+th[data-field=operation]{
+	text-align: center;
+}

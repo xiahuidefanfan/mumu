@@ -22,10 +22,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ServletContext监听器
+ * 
+ * 〈一句话功能简述〉<br> 
+ *  ServletContext监听器
  *
- * @author stylefeng
- * @Date 2018/2/22 21:07
+ * @author 88396254
+ * @date 2018年6月27日 上午11:19:10
+ * @see [相关类/方法]（可选）
+ * @since [产品/模块版本] （可选）
  */
 public class ConfigListener implements ServletContextListener {
 

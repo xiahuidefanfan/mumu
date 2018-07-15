@@ -59,14 +59,14 @@ public class ShiroFactroy implements IShiro {
 
         shiroUser.setId(user.getId());
         shiroUser.setAccount(user.getAccount());
-        shiroUser.setDeptId(user.getDeptid());
-        shiroUser.setDeptName(ConstantFactory.me().getDeptName(user.getDeptid()));
+        shiroUser.setDeptId(user.getDeptId());
+        shiroUser.setDeptName(ConstantFactory.me().getDeptName(user.getDeptId()));
         shiroUser.setName(user.getName());
 
-        Integer[] roleArray = Convert.toIntArray(user.getRoleid());
-        List<Integer> roleList = new ArrayList<Integer>();
+        String[] roleArray = Convert.toStrArray(user.getRoleId());
+        List<String> roleList = new ArrayList<String>();
         List<String> roleNameList = new ArrayList<String>();
-        for (int roleId : roleArray) {
+        for (String roleId : roleArray) {
             roleList.add(roleId);
             roleNameList.add(ConstantFactory.me().getSingleRoleName(roleId));
         }
@@ -77,12 +77,12 @@ public class ShiroFactroy implements IShiro {
     }
 
     @Override
-    public List<String> findPermissionsByRoleId(Integer roleId) {
+    public List<String> findPermissionsByRoleId(String roleId) {
         return menuMapper.getResUrlsByRoleId(roleId);
     }
 
     @Override
-    public String findRoleNameByRoleId(Integer roleId) {
+    public String findRoleNameByRoleId(String roleId) {
         return ConstantFactory.me().getSingleRoleTip(roleId);
     }
 

@@ -19,6 +19,7 @@ import java.lang.reflect.Method;
 
 import javax.naming.NoPermissionException;
 
+import org.apache.shiro.authc.AuthenticationException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -28,7 +29,9 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.mumu.core.common.annotion.Permission;
+import com.mumu.core.shiro.ShiroKit;
 import com.mumu.core.shiro.check.PermissionCheckManager;
+import com.mumu.core.util.ToolUtil;
 
 /**
  * AOP 权限自定义检查
@@ -45,6 +48,10 @@ public class PermissionAop {
 
     @Around("cutPermission()")
     public Object doPermission(ProceedingJoinPoint point) throws Throwable {
+        // 先检查是否登录
+        if(ToolUtil.isEmpty(ShiroKit.getUser())) {
+            throw new AuthenticationException();
+        }
         MethodSignature ms = (MethodSignature) point.getSignature();
         Method method = ms.getMethod();
         Permission permission = method.getAnnotation(Permission.class);

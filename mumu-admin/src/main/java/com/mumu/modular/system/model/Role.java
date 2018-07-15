@@ -32,7 +32,7 @@ public class Role extends Model<Role> {
     /**
      * 父角色id
      */
-	private Integer pid;
+	private String pid;
     /**
      * 角色名称
      */
@@ -64,11 +64,11 @@ public class Role extends Model<Role> {
 		this.num = num;
 	}
 
-	public Integer getPid() {
+	public String getPid() {
 		return pid;
 	}
 
-	public void setPid(Integer pid) {
+	public void setPid(String pid) {
 		this.pid = pid;
 	}
 

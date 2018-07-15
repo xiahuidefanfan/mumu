@@ -41,7 +41,8 @@ require.config({
         'deptTreeService': 'service/common/deptTreeService',
         'roleTreeService': 'service/common/roleTreeService',
         'menuTreeService': 'service/common/menuTreeService',
-        'permissionService': 'service/common/permissionService'
+        'permissionService': 'service/common/permissionService',
+        'flowableNodeService': 'service/common/flowableNodeService'
     },
  
     shim : {

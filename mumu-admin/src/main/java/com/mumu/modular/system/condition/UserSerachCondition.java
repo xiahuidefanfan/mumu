@@ -16,7 +16,7 @@ public class UserSerachCondition {
     private String name;// 名称
     private String beginTime; // 开始时间
     private String endTime;// 结束时间
-    private String deptid;// 部门编号
+    private String deptId;// 部门编号
     
     public String getPage() {
         return page;
@@ -42,8 +42,8 @@ public class UserSerachCondition {
     public String getEndTime() {
         return endTime;
     }
-    public String getDeptid() {
-        return deptid;
+    public String getDeptId() {
+        return deptId;
     }
     public void setBeginTime(String beginTime) {
         this.beginTime = beginTime;
@@ -51,13 +51,13 @@ public class UserSerachCondition {
     public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
-    public void setDeptid(String deptid) {
-        this.deptid = deptid;
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
     }
     @Override
     public String toString() {
         return "UserSerachCondition [page=" + page + ", limit=" + limit + ", name=" + name + ", beginTime=" + beginTime
-                + ", endTime=" + endTime + ", deptid=" + deptid + "]";
+                + ", endTime=" + endTime + ", deptId=" + deptId + "]";
     }
     
 }

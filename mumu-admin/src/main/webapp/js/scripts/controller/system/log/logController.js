@@ -1,12 +1,14 @@
-define(['app', 'deptTreeService','urlConstants','operateUtil', 'tableUtil'], function (app) {
+define(['app', 'deptTreeService', 'permissionService', 'urlConstants','operateUtil', 'tableUtil'], function (app) {
     app.controller('logController',['$scope', 
     								 'deptTreeService', 
+    								 'permissionService',
     								 'urlConstants', 
     								 'operateUtil', 
     								 'tableUtil',
     								 'layer', 
     					   function ($scope, 
     							     deptTreeService, 
+    							     permissionService,
     								 urlConstants, 
     								 operateUtil, 
     								 tableUtil,
@@ -77,6 +79,7 @@ define(['app', 'deptTreeService','urlConstants','operateUtil', 'tableUtil'], fun
     	function init(){
     	    setDefaultVars();// 设置变量及常量
 		    showMain();// 展示主页面数据
+		    permission();
     	}
     	
 	   /**
@@ -93,6 +96,12 @@ define(['app', 'deptTreeService','urlConstants','operateUtil', 'tableUtil'], fun
 		   };// 搜索初始值
 		   $scope.searchItem = angular.copy($scope.defaultSearchItem);
 		   $scope.submitData = {}; // 选中的部门
+		   $scope.buttonPermission = {
+				   detail:false,
+				   delete:false,
+				   deleteAll: false
+		   }
+		   $scope.buttons = ['/log/detail','/log/delete','/log/deleteAll'];
 		   
 		   $scope.tableOptions = {
    		        url: urlConstants.LOG_LIST_URL, //请求地址
@@ -153,6 +162,14 @@ define(['app', 'deptTreeService','urlConstants','operateUtil', 'tableUtil'], fun
 			   
 		   });
 	   }
+	   
+	   /**
+	    * 按钮权限
+	    */
+	   function permission(){
+		   permissionService.hasPermission($scope);
+	   }
+	   
     }]);
 }); 
 

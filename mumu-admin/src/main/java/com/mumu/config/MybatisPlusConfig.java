@@ -21,10 +21,14 @@ import com.mumu.core.mutidatasource.DynamicDataSource;
 import com.mumu.core.mutidatasource.config.MutiDataSourceProperties;
 
 /**
- * MybatisPlus配置
+ * 
+ * 〈一句话功能简述〉<br> 
+ *  MybatisPlus配置
  *
- * @author stylefeng
- * @Date 2017/5/20 21:58
+ * @author 88396254
+ * @date 2018年7月11日 下午3:06:59
+ * @see [相关类/方法]（可选）
+ * @since [产品/模块版本] （可选）
  */
 @Configuration
 @EnableTransactionManagement(order = 2)
@@ -50,7 +54,7 @@ public class MybatisPlusConfig {
     /**
      * guns的数据源
      */
-    private DruidDataSource dataSourceGuns() {
+    private DruidDataSource dataSourceMumu() {
         DruidDataSource dataSource = new DruidDataSource();
         druidProperties.config(dataSource);
         return dataSource;
@@ -60,23 +64,23 @@ public class MybatisPlusConfig {
      * 单数据源连接池配置
      */
     @Bean
-    @ConditionalOnProperty(prefix = "guns", name = "muti-datasource-open", havingValue = "false")
+    @ConditionalOnProperty(prefix = "mumu", name = "muti-datasource-open", havingValue = "false")
     public DruidDataSource singleDatasource() {
-        return dataSourceGuns();
+        return dataSourceMumu();
     }
 
     /**
      * 多数据源连接池配置
      */
     @Bean
-    @ConditionalOnProperty(prefix = "guns", name = "muti-datasource-open", havingValue = "true")
+    @ConditionalOnProperty(prefix = "mumu", name = "muti-datasource-open", havingValue = "true")
     public DynamicDataSource mutiDataSource() {
 
-        DruidDataSource dataSourceGuns = dataSourceGuns();
+        DruidDataSource dataSourceMumu = dataSourceMumu();
         DruidDataSource bizDataSource = bizDataSource();
 
         try {
-            dataSourceGuns.init();
+            dataSourceMumu.init();
             bizDataSource.init();
         } catch (SQLException sql) {
             sql.printStackTrace();
@@ -84,10 +88,10 @@ public class MybatisPlusConfig {
 
         DynamicDataSource dynamicDataSource = new DynamicDataSource();
         HashMap<Object, Object> hashMap = new HashMap<Object, Object>(CommConst.DEFAULT_MAP_SIZE);
-        hashMap.put(DatasourceEnum.DATA_SOURCE_GUNS, dataSourceGuns);
+        hashMap.put(DatasourceEnum.DATA_SOURCE_MUMU, dataSourceMumu);
         hashMap.put(DatasourceEnum.DATA_SOURCE_BIZ, bizDataSource);
         dynamicDataSource.setTargetDataSources(hashMap);
-        dynamicDataSource.setDefaultTargetDataSource(dataSourceGuns);
+        dynamicDataSource.setDefaultTargetDataSource(dataSourceMumu);
         return dynamicDataSource;
     }
 

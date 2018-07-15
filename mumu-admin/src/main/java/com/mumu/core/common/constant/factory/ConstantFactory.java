@@ -63,7 +63,7 @@ public class ConstantFactory implements IConstantFactory {
      * @Date 2017/5/9 23:41
      */
     @Override
-    public String getUserNameById(Integer userId) {
+    public String getUserNameById(String userId) {
         User user = userMapper.selectById(userId);
         if (user != null) {
             return user.getName();
@@ -110,8 +110,8 @@ public class ConstantFactory implements IConstantFactory {
      */
     @Override
     @Cacheable(value = Cache.CONSTANT, key = "'" + CacheKey.SINGLE_ROLE_NAME + "'+#roleId")
-    public String getSingleRoleName(Integer roleId) {
-        if (0 == roleId) {
+    public String getSingleRoleName(String roleId) {
+        if (roleId.equals("0")) {
             return "--";
         }
         Role roleObj = roleMapper.selectById(roleId);
@@ -126,8 +126,8 @@ public class ConstantFactory implements IConstantFactory {
      */
     @Override
     @Cacheable(value = Cache.CONSTANT, key = "'" + CacheKey.SINGLE_ROLE_TIP + "'+#roleId")
-    public String getSingleRoleTip(Integer roleId) {
-        if (0 == roleId) {
+    public String getSingleRoleTip(String roleId) {
+        if (roleId.equals("0")) {
             return "--";
         }
         Role roleObj = roleMapper.selectById(roleId);

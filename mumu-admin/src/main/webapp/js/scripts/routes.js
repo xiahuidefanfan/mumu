@@ -38,10 +38,28 @@
                 dependencies: ['controller/system/role/roleController'],
                 allowAnonymous: true
             },
-            'main.log': { // 角色管理路由
+            'main.log': { // 业务日志路由
                 templateUrl: '/views/system/log/log.html',
                 url: '/log',
                 dependencies: ['controller/system/log/logController'],
+                allowAnonymous: true
+            },
+            'main.expense': { // 报销管理路由
+                templateUrl: '/views/flowable/expense/expense.html',
+                url: '/.expense',
+                dependencies: ['controller/flowable/expense/expenseController'],
+                allowAnonymous: true
+            },
+            'main.expense_progress': { // 报销审核路由
+                templateUrl: '/views/flowable/expense/expense_progress.html',
+                url: '/.expense_progress',
+                dependencies: ['controller/flowable/expense/expenseProgressController'],
+                allowAnonymous: true
+            },
+            'main.flowable_node': { //流程节点路由
+            	templateUrl: '/views/flowable/flowable_node.html',
+                url: '/.flowable_node',
+                dependencies: ['controller/flowable/flowableNodeController'],
                 allowAnonymous: true
             }
             

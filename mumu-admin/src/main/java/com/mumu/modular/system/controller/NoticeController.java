@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mumu.core.common.annotion.Permission;
 import com.mumu.core.support.RespData;
 import com.mumu.modular.system.model.Notice;
 
@@ -24,6 +25,7 @@ public class NoticeController {
     
     @RequestMapping(value="/msg", method = RequestMethod.POST)
     @ResponseBody
+    @Permission
     public RespData getNoticeMsgs() {
         return RespData.getRespData(HttpStatus.OK.value(), new Notice().selectAll(), "");
     }

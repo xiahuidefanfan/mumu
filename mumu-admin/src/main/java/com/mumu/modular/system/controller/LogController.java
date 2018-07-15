@@ -14,6 +14,7 @@ import com.baomidou.mybatisplus.mapper.SqlRunner;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.mumu.core.base.controller.BaseController;
 import com.mumu.core.common.annotion.BussinessLog;
+import com.mumu.core.common.annotion.Permission;
 import com.mumu.core.common.constant.factory.PageFactory;
 import com.mumu.core.common.constant.state.BizLogType;
 import com.mumu.core.common.exception.BizExceptionEnum;
@@ -44,6 +45,7 @@ public class LogController extends BaseController {
     @SuppressWarnings("unchecked")
     @RequestMapping("/list")
     @ResponseBody
+    @Permission
     public RespData list(LogSearchCondition condition) {
         Page<OperationLog> page = new PageFactory<OperationLog>().defaultPage();
         condition.setLogType(BizLogType.valueOf(Integer.parseInt(condition.getLogType())));
@@ -57,6 +59,7 @@ public class LogController extends BaseController {
      */
     @RequestMapping("/delete")
     @ResponseBody
+    @Permission
     public RespData delete(@RequestBody List<String> ids) {
         if (ToolUtil.isEmpty(ids)) {
             throw new MumuException(BizExceptionEnum.REQUEST_NULL);
@@ -71,6 +74,7 @@ public class LogController extends BaseController {
     @BussinessLog(value = "清空日志")
     @RequestMapping("/deleteAll")
     @ResponseBody
+    @Permission
     public RespData deleteAll() {
         SqlRunner.db().delete("delete from sys_operation_log");
         return RespData.getRespData(HttpStatus.OK.value(), null, "删除日志成功！");

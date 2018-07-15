@@ -8,8 +8,8 @@ package com.mumu.core.common.constant.state;
  */
 public enum IsMenu {
 
-    YES(1, "是"),
-    NO(0, "不是");//不是菜单的是按钮
+    YES(1, "菜单"),
+    NO(0, "按钮");//不是菜单的是按钮
 
     int code;
     String message;

@@ -14,8 +14,8 @@
 		<result column="sex" property="sex" />
 		<result column="email" property="email" />
 		<result column="phone" property="phone" />
-		<result column="roleid" property="roleid" />
-		<result column="deptid" property="deptid" />
+		<result column="roleId" property="roleId" />
+		<result column="deptId" property="deptId" />
 		<result column="status" property="status" />
 		<result column="createtime" property="createtime" />
 		<result column="version" property="version" />
@@ -23,15 +23,15 @@
 
 	<sql id="Base_Column_List">
 		id, account, name, birthday, sex, email, avatar,
-		phone, roleid,
-		deptid, status,
+		phone, roleId,
+		deptId, status,
 		createtime, version
 	</sql>
 
 	<sql id="Base_Column_List_With_Pwd">
 		id, account, name, birthday, password, sex, email, avatar,
-		phone, roleid,salt,
-		deptid, status,
+		phone, roleId, salt,
+		deptId, status,
 		createtime, version
 	</sql>
 
@@ -45,8 +45,8 @@
 			or account like CONCAT('%',#{condition.name},'%')
 			or name like CONCAT('%',#{condition.name},'%'))
 		</if>
-		<if test="condition.deptid != null and condition.deptid != ''">
-			and (deptid = #{condition.deptid} or deptid in ( select id from sys_dept where pids like CONCAT('%[', #{condition.deptid}, ']%') ))
+		<if test="condition.deptId != null and condition.deptId != ''">
+			and (deptId = #{condition.deptId} or deptId in ( select id from sys_dept where pids like CONCAT('%[', #{condition.deptId}, ']%') ))
 		</if>
 		<if test="condition.beginTime != null and condition.beginTime != ''">
 			and createTime > CONCAT(#{condition.beginTime},' 00:00:00')
@@ -68,7 +68,7 @@
 	</update>
 
 	<update id="setRoles">
-		update sys_user set roleid = #{roleIds} where id =
+		update sys_user set roleId = #{roleIds} where id =
 		#{userId}
 	</update>
 
@@ -76,6 +76,13 @@
 		select
 		<include refid="Base_Column_List_With_Pwd" />
 		from sys_user where account = #{account} and status != 3
+	</select>
+	
+	<select id="getByRoleId" resultType="map">
+		select
+		<include refid="Base_Column_List" />
+		from sys_user
+		where roleId = #{roleId}
 	</select>
 
 </mapper>

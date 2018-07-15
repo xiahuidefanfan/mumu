@@ -17,11 +17,15 @@ loginApp.controller('loginController',['$scope', '$http', '$location',
 			data : data
 		}).success(function(resp) {
 			$scope.showLoginError = false;
-			window.location = "/views/index.html";
+			var returnRouter = "";
+			if(window.location.href.indexOf('=') > -1){
+				returnRouter = window.location.href.substring(window.location.href.indexOf('=') + 1);
+			}
+			window.location = "/views/index.html#" + returnRouter;
 		}).error(function(resp){
 			// 提示用户名或密码错误
 			$scope.showLoginError = true;
-			$scope.loginErrorMsg = resp.errorMessage;
+			$scope.loginErrorMsg = resp.message;
 		});
 	}
 }]);

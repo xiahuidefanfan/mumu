@@ -15,9 +15,18 @@ define(['app'], function(app) {
 		}
 		
 		me.treeTable = function(scope){
-		     var instance =
-		    	 $('#'+ scope.tableOptions.tableId).bootstrapTreeTable(angular.merge(me.defaultTableOptions,scope.tableOptions));
-            return instance;
+			me.cTableOptions = angular.copy(me.defaultTableOptions);
+			 var instance =
+		    	 $('#'+ scope.tableOptions.tableId).bootstrapTreeTable(angular.merge(me.cTableOptions,scope.tableOptions));
+             return instance;
+		}
+		
+		/**
+		 * 重载表格
+		 */
+		me.reloadTable = function(scope){
+			debugger
+			scope.table.bootstrapTreeTable('refresh', scope.searchItem);
 		}
 		
 	});

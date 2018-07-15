@@ -31,6 +31,13 @@
 		from sys_role
 		where name = #{name}
 	</select>
+	
+	<select id="selectRoleByTip" resultType="role">
+		select
+		<include refid="Base_Column_List" />
+		from sys_role
+		where tips = #{tip}
+	</select>
 
 	<delete id="deleteRolesById">
 		delete from sys_relation where roleid = #{roleId}

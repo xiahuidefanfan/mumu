@@ -1,17 +1,17 @@
-define(['app', 'deptTreeService', 'permissionService', 'urlConstants','operateUtil', 'tableUtil'], function (app) {
+define(['app', 'deptTreeService', 'permissionService', 'urlConstants','operateUtil', 'treeTableUtil','bootstrapTreeTable'], function (app) {
     app.controller('deptController',['$scope', 
     								 'deptTreeService',
     								 'permissionService',
     								 'urlConstants', 
     								 'operateUtil', 
-    								 'tableUtil',
+    								 'treeTableUtil',
     								 'layer', 
     					   function ($scope, 
     							     deptTreeService,
     							     permissionService,
     								 urlConstants, 
     								 operateUtil, 
-    								 tableUtil,
+    								 treeTableUtil,
     								 layer) {
     	
     	/**
@@ -52,10 +52,9 @@ define(['app', 'deptTreeService', 'permissionService', 'urlConstants','operateUt
     					area: ['800px','auto'],
                         contentUrl: urlConstants.DEPT_UPDATE_PAGE_URL
                     },
-                    setChosed: true
-                    
-    			},
-    			setParDept
+                    setChosed: true,
+                    tableType: 'tree'
+    			}
 			);
 	    }
     	
@@ -76,8 +75,8 @@ define(['app', 'deptTreeService', 'permissionService', 'urlConstants','operateUt
     		operateUtil.confirmSubmit({
  				scope:$scope,
  				url: urlConstants.DEPT_DELETE_URL,
- 				multiple: false,
- 				msg: '确定要删除选中数据吗？'
+ 				tableType: 'tree',
+ 				msg: '确定要删除选中的部门吗？'
  				
  			})
     	}
@@ -120,22 +119,10 @@ define(['app', 'deptTreeService', 'permissionService', 'urlConstants','operateUt
     		if(null != treeNode){
     			// 父部门id要单独设置
 	    		$scope.submitData.pid = treeNode.id;
-    			$scope.parDeptName = treeNode.name;
+    			$scope.submitData.pName = treeNode.name;
     			$scope.$apply();
     		}
 		}
-    	
-    	/**
-    	 * 获取选中的部门的父部门名称
-    	 */
-    	function setParDept(){
-    		angular.forEach($scope.table.cache.listReload, function(dept, index){
-    			if(dept.id == $scope.submitData.pid){
-    				$scope.parDeptName = dept.simplename;
-    				return false;
-    			}
-    		});
-    	}
     	
     	// 页面初始化
     	init();
@@ -168,48 +155,33 @@ define(['app', 'deptTreeService', 'permissionService', 'urlConstants','operateUt
 		   $scope.buttons = ['/dept/add','/dept/update','/dept/delete'];
 		   
 		   $scope.tableOptions = {
-   		        url: urlConstants.DEPT_LIST_URL, //请求地址
-   		        method: 'POST', //方式
-   		        id: 'listReload', //生成 Layui table 的标识 id，必须提供，用于后文刷新操作，笔者该处出过问题
-   		        cols: [[
-   	    		      {checkbox: true, fixed: true},
-   	    		      {field:'id', title: 'id', align: 'center', valign: 'middle', sort: true},
-   	    		      {field:'simplename', title: '部门简称', align: 'center', valign: 'middle', sort: true},
-   	    		      {field:'fullname', title: '部门全称', align: 'center', valign: 'middle', sort: true},
-   	    		      {field:'pName', title: '上级部门', align: 'center', valign: 'middle', sort: true},
-   	    		      {field:'tips', title: '备注', align: 'center', valign: 'middle', sort: true},
-   	    		      {field:'num', title: '排序', align: 'center', valign: 'middle', sort: true}
-   	    		    ]],
-   	    		even: false, // 样式s
-   			    height: 570,
-   		        page: false, //是否分页
-   		        where: $scope.searchItem, //请求后端接口的条件
-   		        response: {
-   		            statusName: 'statusCode', //状态字段名称
-   		            statusCode: '200', //状态字段成功值
-   		            msgName: 'errorMessage', //消息字段
-   		            dataName: 'data' //数据字段
-   		        }
-   		     };
+				 tableId: 'deptTable' ,// 选取记录返回的值
+	             code: 'fullname',// 用于设置父子关系
+	             parentCode: 'pName',// 用于设置父子关系
+	             url: urlConstants.DEPT_LIST_URL,//请求数据的ajax的url
+	             ajaxParams: $scope.searchItem, //请求数据的ajax的data属性
+	             columns: [
+	                 {field: 'selectItem', radio: true},
+	                 {title: 'id', field: 'id', align: 'center'},
+	                 {title: '部门简称', field: 'simplename', width: '12%'},
+	                 {title: '部门全称', field: 'fullname', width: '18%', align: 'center'},
+	                 {title: '上级部门', field: 'pName', align: 'center'},
+	                 {title: '备注', field: 'tips', align: 'center'},
+	                 {title: '排序', field: 'num', align: 'center'}],	//列数组
+	             height: 540,
+	    	}
+    	   
+    	   /**
+    	    * 刷新表格
+    	    */
+    	    $scope.reloadTable = function(){
+    		   	 treeTableUtil.reloadTable($scope);
+    	    }
+	    } 
 		   
-		   /**
-		    * 刷新表格
-		    */
-		   $scope.reloadTable = function(){
-			   tableUtil.reloadTable($scope);
-		   }
-   	   }
-		   
-	   /**
-	    * 展示主页面数据
-	    */
-	   function showMain(){
-		   layui.use('table', function(){
-    		   $scope.table = layui.table;
-    		   // 初始化表格
-			   $scope.table.init('dept_table', $scope.tableOptions);
-    	   });
-	   }
+	    function showMain(){
+		   $scope.table = treeTableUtil.treeTable($scope);
+	    }	
 	   
 	   /**
 	    * 按钮权限

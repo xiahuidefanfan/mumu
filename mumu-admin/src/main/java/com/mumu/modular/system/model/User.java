@@ -67,11 +67,11 @@ public class User extends Model<User> {
     /**
      * 角色id（一个用户可以有多个）
      */
-	private String roleid;
+	private String roleId;
     /**
      * 部门id
      */
-	private String deptid;
+	private String deptId;
     /**
      * 状态(1：启用  2：冻结  3：删除）
      */
@@ -166,23 +166,27 @@ public class User extends Model<User> {
 		this.phone = phone;
 	}
 
-	public String getRoleid() {
-		return roleid;
-	}
+	public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
 
-	public void setRoleid(String roleid) {
-		this.roleid = roleid;
-	}
+    public String getRoleId() {
+        return roleId;
+    }
 
-	public String getDeptid() {
-		return deptid;
-	}
+    public String getDeptId() {
+        return deptId;
+    }
 
-	public void setDeptid(String deptid) {
-		this.deptid = deptid;
-	}
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
+    }
 
-	public Integer getStatus() {
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
+
+    public Integer getStatus() {
 		return status;
 	}
 
@@ -224,8 +228,8 @@ public class User extends Model<User> {
 			", sex=" + sex +
 			", email=" + email +
 			", phone=" + phone +
-			", roleid=" + roleid +
-			", deptid=" + deptid +
+			", roleid=" + roleId +
+			", deptid=" + deptId +
 			", status=" + status +
 			", createtime=" + createtime +
 			", version=" + version +
