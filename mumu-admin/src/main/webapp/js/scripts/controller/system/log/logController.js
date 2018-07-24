@@ -1,13 +1,11 @@
-define(['app', 'deptTreeService', 'permissionService', 'urlConstants','operateUtil', 'tableUtil'], function (app) {
+define(['app', 'permissionService', 'urlConstants','operateUtil', 'tableUtil'], function (app) {
     app.controller('logController',['$scope', 
-    								 'deptTreeService', 
     								 'permissionService',
     								 'urlConstants', 
     								 'operateUtil', 
     								 'tableUtil',
     								 'layer', 
     					   function ($scope, 
-    							     deptTreeService, 
     							     permissionService,
     								 urlConstants, 
     								 operateUtil, 
@@ -86,8 +84,6 @@ define(['app', 'deptTreeService', 'permissionService', 'urlConstants','operateUt
 	    * 设置变量及常量
 	    */
 	   function setDefaultVars(){
-		   $scope.rootDeptPid = 0;
-		   $scope.depts = [];// 列表展示数据,
 		   $scope.defaultSearchItem = {
 			   beginTime: '',
 		       endTime: '',

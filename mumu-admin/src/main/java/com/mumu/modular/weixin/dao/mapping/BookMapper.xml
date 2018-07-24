@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mumu.modular.weixin.dao.BookMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.mumu.modular.weixin.model.Book">
+        <id column="id" property="id"/>
+        <result column="bookName" property="bookName"/>
+        <result column="owner" property="owner"/>
+        <result column="type" property="type"/>
+        <result column="deleteFlag" property="deleteFlag"/>
+        <result column="isUpper" property="isUpper"/>
+        <result column="createTime" property="createTime"/>
+        <result column="updateTime" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+		id, bookName, owner, owner, deleteFlag,isUpper,createTime,updateTime
+	</sql>
+
+    <select id="selectByCode" resultType="dict">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_dict
+        where code = #{code}
+    </select>
+
+    <select id="list" resultType="map">
+        select 
+       	 <include refid="Base_Column_List"/>
+       	from weixin_book
+        where 1 = 1
+        <if test="condition != null and condition != ''">
+            AND bookName like CONCAT('%',#{condition},'%')
+        </if>
+        order by id ASC
+    </select>
+
+</mapper>

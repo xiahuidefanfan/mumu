@@ -29,6 +29,11 @@ define(['app'], function(app) {
 	    DEPT_ADD_PAGE_URL: '../views/system/dept/dept_add.html',            		  // 部门添加
 	    DEPT_UPDATE_PAGE_URL: '../views/system/dept/dept_update.html',      		  // 部门更新
 	    
+	    DICT_LIST_URL: '/dict/list',                                                  // 字典列表
+	    DEPT_ADD_URL: '/dept/add',                            	           		      // 字典添加
+		DEPT_UPDATE_URL: '/dept/update',						     	    		  // 字典更新
+		DEPT_DELETE_URL: '/dept/delete',                                              // 字典删除
+	    
 	    ROLE_LIST_URL: '/role/list',                                       			  // 角色列表                          
 	    ROLE_ADD_URL: '/role/add',                     					   		      // 角色添加
 	    ROLE_UPDATE_URL: '/role/update',								   		 	  // 角色更新
@@ -62,6 +67,10 @@ define(['app'], function(app) {
         
         FLOWABLE_NODE_LIST: '/flowableNode/list',                                     // 流程节点
         FLOWABLE_TARGET_IDS_URL: '/flowableNode/targetIds',                           // 回退节点
+        
+        
+        
+        BOOK_LIST_URL: '/book/list',                                                  // 书籍列表
 	    
 	});
 });

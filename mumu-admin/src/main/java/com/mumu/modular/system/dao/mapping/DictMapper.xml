@@ -23,8 +23,10 @@
     </select>
 
     <select id="list" resultType="map">
-        select * from sys_dict
-        where pid = 0
+        select 
+       	t1.id as id, t1.num as num, t1.code as code, t1.pid as pId, t1.name as name, t1.tips as tips, t2.name as pName
+        FROM sys_dict t1 LEFT JOIN sys_dict t2 ON t1.pid = t2.id
+        where 1 = 1
         <if test="condition != null and condition != ''">
             AND name like CONCAT('%',#{condition},'%')
         </if>

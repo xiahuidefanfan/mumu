@@ -1,12 +1,9 @@
 package com.mumu.modular.system.warpper;
 
-import com.mumu.core.common.constant.factory.ConstantFactory;
-import com.mumu.modular.system.model.Dict;
+import java.util.Map;
+
 import com.mumu.core.base.warpper.BaseControllerWarpper;
 import com.mumu.core.util.ToolUtil;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * 
@@ -27,14 +24,9 @@ public class DictWarpper extends BaseControllerWarpper {
 
     @Override
     public void warpTheMap(Map<String, Object> map) {
-        StringBuffer detail = new StringBuffer();
-        Integer id = (Integer) map.get("id");
-        List<Dict> dicts = ConstantFactory.me().findInDict(id);
-        if(dicts != null){
-            for (Dict dict : dicts) {
-                detail.append(dict.getNum() + ":" +dict.getName() + ",");
-            }
-            map.put("detail", ToolUtil.removeSuffix(detail.toString(),","));
+        Integer pid = (Integer) map.get("pid");
+        if (ToolUtil.isEmpty(pid) || pid.equals(0)) {
+            map.put("pName", "--");
         }
     }
 

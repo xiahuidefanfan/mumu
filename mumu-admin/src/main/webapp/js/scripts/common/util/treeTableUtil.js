@@ -25,7 +25,6 @@ define(['app'], function(app) {
 		 * 重载表格
 		 */
 		me.reloadTable = function(scope){
-			debugger
 			scope.table.bootstrapTreeTable('refresh', scope.searchItem);
 		}
 		

@@ -38,6 +38,12 @@
                 dependencies: ['controller/system/role/roleController'],
                 allowAnonymous: true
             },
+            'main.dict': { // 字典管理路由
+                templateUrl: '/views/system/dict/dict.html',
+                url: '/dict',
+                dependencies: ['controller/system/dict/dictController'],
+                allowAnonymous: true
+            },
             'main.log': { // 业务日志路由
                 templateUrl: '/views/system/log/log.html',
                 url: '/log',
@@ -61,7 +67,15 @@
                 url: '/.flowable_node',
                 dependencies: ['controller/flowable/flowableNodeController'],
                 allowAnonymous: true
-            }
+            },
+            
+            
+            'main.book': { //书籍管理路由
+            	templateUrl: '/views/weixin/book/book.html',
+                url: '/.book',
+                dependencies: ['controller/weixin/book/bookController'],
+                allowAnonymous: true
+            },
             
             
         }

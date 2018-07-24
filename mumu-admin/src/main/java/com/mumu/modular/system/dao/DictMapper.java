@@ -26,5 +26,5 @@ public interface DictMapper extends BaseMapper<Dict> {
     /**
      * 查询字典列表
      */
-    List<Map<String, Object>> list(@Param("condition") String conditiion);
+    List<Map<String, Object>> list(@Param("condition") String condition);
 }
