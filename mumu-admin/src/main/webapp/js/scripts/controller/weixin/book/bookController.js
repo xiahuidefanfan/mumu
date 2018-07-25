@@ -11,36 +11,58 @@ define(['app', 'urlConstants','operateUtil', 'tableUtil'], function (app) {
     								 layer) {
     	
     	
-     	/**
-    	 * 查看书籍详情
-    	 */
-    	$scope.openDetail = function(){
-    		operateUtil.infoDetail('书籍详情', $scope, 'regularMessage');
-	    }
-    	
-	     /**
-     	 * 删除书籍
+    	  /**
+	     * 主页面-添加书籍打开弹框
+	     */
+	    $scope.openAdd = function(){
+	    	operateUtil.openLayer(
+    			{
+    				scope: $scope,
+    				layerprops:{
+    					title: '书籍添加',
+    					area: ['808px','auto'],
+                        contentUrl: urlConstants.BOOK_ADD_PAGE_URL
+                    }
+    			}
+			);
+		     }
+	    
+	    /**
+ 	     *  添加-提交任务
+ 	     */
+ 	     $scope.addSubmit = function(){
+ 	    	 operateUtil.doSubmit({
+ 	    		 scope:$scope, 
+ 	    		 url: urlConstants.BOOK_ADD_URL
+ 	    	 });
+ 	     }
+ 	     
+ 	    /**
+     	 * 提交添加
      	 */
-     	 $scope.deleteLog = function(){
-     		 operateUtil.confirmSubmit({
- 				scope: $scope,
- 				url: urlConstants.LOG_DELETE_URL,
- 				multiple: true,
- 				msg: '确定要删除选中的书籍吗？'
- 			});
-     	 }
-    	
-     	 /**
-      	 * 删除书籍
-      	 */
-      	 $scope.deleteAllLog = function(){
-      		 operateUtil.confirmSubmit({
-  				scope: $scope,
-  				url: urlConstants.LOG_DELETEALL_URL,
-  				msg: '确定要清除书籍吗？',
-  				noNeedCheckd: true
-  			});
-      	 }
+     	$scope.addSubmit = function(){
+     		operateUtil.doSubmit({
+     			scope: $scope, 
+     			url: urlConstants.BOOK_ADD_URL
+     		});
+ 		}
+     	
+     	/**
+     	 * 修改书籍，弹框展示
+     	 */
+     	$scope.openUpdate = function(){
+     		operateUtil.openLayer(
+ 				{
+     				scope: $scope,
+     				layerprops:{
+     					title: '书籍修改',
+     					area: ['808px','auto'],
+                         contentUrl: urlConstants.BOOK_UPDATE_PAGE_URL
+                     },
+                     setChosed: true,
+     			}
+ 			);
+ 	    }
      	 
     	/**
     	 * 主页面-清除筛选条件
@@ -92,11 +114,13 @@ define(['app', 'urlConstants','operateUtil', 'tableUtil'], function (app) {
    	    		      {field:'id', title: 'id', align: 'center', valign: 'middle', sort: true},
    	    		      {field:'bookName', title: '书籍名称', align: 'center', valign: 'middle', sort: true},
    	    		      {field:'owner', title: '所有者', align: 'center', valign: 'middle', sort: true},
+   	    		      {field:'price', title: '价格（元）', align: 'center', valign: 'middle', sort: true},
    	    		      {field:'type', title: '书籍类型', align: 'center', valign: 'middle', sort: true},
-   	    		      {field:'isUpper', title: '是否上架', align: 'center', valign: 'middle', sort: true},
-   	    		      {field:'deleteFlag', title: '是否删除', align: 'center', valign: 'middle', sort: true},
-	    		      {field:'createTime', title: '创建时间', align: 'center', valign: 'middle', sort: true},
-	    		      {field:'updateTime', title: '修改时间', align: 'center', valign: 'middle', sort: true},
+   	    		      {field:'isUpperName', title: '是否上架', align: 'center', valign: 'middle', sort: true},
+   	    		      {field:'deleteFlagName', title: '是否删除', align: 'center', valign: 'middle', sort: true},
+	    		      {field:'createTimeFormat', title: '创建时间', align: 'center', valign: 'middle', sort: true},
+	    		      {field:'updateTimeFormat', title: '修改时间', align: 'center', valign: 'middle', sort: true},
+	    		      {field:'tips', title: '书籍简介', align: 'center', valign: 'middle', sort: true},
    	    		    ]],
    		        page: true, //是否分页
 	       };

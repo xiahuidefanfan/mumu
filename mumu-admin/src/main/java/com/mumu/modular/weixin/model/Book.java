@@ -1,14 +1,20 @@
 package com.mumu.modular.weixin.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
+import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 
 @TableName("weixin_book")
-public class Book {
+public class Book extends Model<Book> {
 	
+    /**
+     */
+    private static final long serialVersionUID = 1L;
+
     /**
      * 主键id
      */
@@ -21,6 +27,11 @@ public class Book {
 	private String bookName; 
 	
 	/**
+	 * 价格
+	 */
+	private double price;
+	
+	/**
 	 * 所有者
 	 */
 	private String owner; 
@@ -31,12 +42,12 @@ public class Book {
 	private String type;
 	
 	/**
-	 * 是否删除 1：删除 0：未删除
+	 * 是否删除 
 	 */
-	private String deleteFlag; 
+	private String deleteFlag;
 	
 	/**
-	 * 是否上架 1：上架 0：未上架
+	 * 是否上架 
 	 */
 	private String isUpper;
 	
@@ -45,10 +56,16 @@ public class Book {
 	 */
 	private Date createTime;
 	
-	/*
+	/**
 	 * 修改时间
 	 */
 	private Date updateTime;
+	
+	/**
+	 * 书籍简介
+	 */
+	private String tips;
+	
 	public String getId() {
 		return id;
 	}
@@ -61,7 +78,13 @@ public class Book {
 	public void setBookName(String bookName) {
 		this.bookName = bookName;
 	}
-	public String getOwner() {
+	public double getPrice() {
+        return price;
+    }
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    public String getOwner() {
 		return owner;
 	}
 	public void setOwner(String owner) {
@@ -97,5 +120,15 @@ public class Book {
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
+    public String getTips() {
+        return tips;
+    }
+    public void setTips(String tips) {
+        this.tips = tips;
+    }
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
 	
 }

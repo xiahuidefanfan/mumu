@@ -6,20 +6,21 @@
     <resultMap id="BaseResultMap" type="com.mumu.modular.system.model.Dict">
         <id column="id" property="id"/>
         <result column="num" property="num"/>
-        <result column="pid" property="pid"/>
+        <result column="pId" property="pid"/>
         <result column="name" property="name"/>
+        <result column="code" property="code"/>
         <result column="tips" property="tips"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-		id, num, pid, name, tips
+		id, num,code, pid, name, tips
 	</sql>
 
     <select id="selectByCode" resultType="dict">
         select
         <include refid="Base_Column_List"/>
         from sys_dict
-        where code = #{code}
+        where code like CONCAT('%',#{code},'%')
     </select>
 
     <select id="list" resultType="map">
@@ -28,7 +29,7 @@
         FROM sys_dict t1 LEFT JOIN sys_dict t2 ON t1.pid = t2.id
         where 1 = 1
         <if test="condition != null and condition != ''">
-            AND name like CONCAT('%',#{condition},'%')
+            AND t1.name like CONCAT('%',#{condition},'%')
         </if>
         order by id ASC
     </select>

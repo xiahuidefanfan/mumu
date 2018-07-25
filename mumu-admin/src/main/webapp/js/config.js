@@ -38,6 +38,7 @@ require.config({
         'urlConstants': 'common/constants/urlConstants',
         'equalTo': 'directive/valid/equalTo',
         'ajaxService': 'service/common/ajaxService',
+        'dictTreeService': 'service/common/dictTreeService',
         'deptTreeService': 'service/common/deptTreeService',
         'roleTreeService': 'service/common/roleTreeService',
         'menuTreeService': 'service/common/menuTreeService',

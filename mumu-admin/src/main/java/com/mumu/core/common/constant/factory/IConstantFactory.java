@@ -1,6 +1,7 @@
 package com.mumu.core.common.constant.factory;
 
 import java.util.List;
+import java.util.Map;
 
 import com.mumu.modular.system.model.Dict;
 
@@ -77,6 +78,16 @@ public interface IConstantFactory {
      * 根据字典名称和字典中的值获取对应的名称
      */
     String getDictsByName(String name, Integer val);
+    
+    /**
+     * 获取所有字典
+     */
+    List<Map<String, Object>> getDicts();
+    
+    /**
+     * 根据code获取一类字典
+     */
+    List<Dict> findDictByCode(String code);
 
     /**
      * 获取性别名称

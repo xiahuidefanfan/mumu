@@ -30,9 +30,11 @@ define(['app'], function(app) {
 	    DEPT_UPDATE_PAGE_URL: '../views/system/dept/dept_update.html',      		  // 部门更新
 	    
 	    DICT_LIST_URL: '/dict/list',                                                  // 字典列表
-	    DEPT_ADD_URL: '/dept/add',                            	           		      // 字典添加
-		DEPT_UPDATE_URL: '/dept/update',						     	    		  // 字典更新
-		DEPT_DELETE_URL: '/dept/delete',                                              // 字典删除
+	    DICT_ADD_URL: '/dict/add',                            	           		      // 字典添加
+	    DICT_UPDATE_URL: '/dict/update',						     	    		  // 字典更新
+	    DICT_DELETE_URL: '/dict/delete',                                              // 字典删除
+	    DICT_ADD_PAGE_URL: '../views/system/dict/dict_add.html',            		  // 字典添加
+	    DICT_UPDATE_PAGE_URL: '../views/system/dict/dict_update.html',      		  // 字典更新
 	    
 	    ROLE_LIST_URL: '/role/list',                                       			  // 角色列表                          
 	    ROLE_ADD_URL: '/role/add',                     					   		      // 角色添加
@@ -49,28 +51,33 @@ define(['app'], function(app) {
 	    LOG_DELETEALL_URL: '/log/deleteAll',                                          // 日志清除
         LOG_DETAIL_URL: '../views/system/log/log_detail.html',                        // 日志详情
 	    	
-        EXPENSE_LIST_URL: '/expense/list',                                  		  // 报销列表
-        EXPENSE_ADD_URL: '/expense/add',                                              // 报销添加
-        EXPENSE_UPDATE_URL: '/expense/update',                                        // 报销更新
-        EXPENSE_DELETE_URL: '/expense/delete',                                        // 报销删除
-        EXPENSE_EXECUTE_URL: '/expense/execute',                                      // 报销启动
-        EXPENSE_ROLL_BACK_URL: '/expense/rollback',                                   // 报销回退
-        EXPENSE_EXPENSE_VIEW_URL: '/expense/expenseView',                             // 报销流程
-        EXPENSE_PASS_URL: '/expense/pass',                                    		  // 报销通过
-        EXPENSE_UNPASS_URL: '/expense/unPass',                                        // 报销驳回
-        EXPENSE_TASk_LIST_URL: '/expense/taskList',                                   // 报销审核
-        EXPENSE_ADD_PAGE_URL: '../views/flowable/expense/expense_add.html', 	      // 报销流程
-        EXPENSE_ADUIT_PAGE_URL: '../views/flowable/expense/expense_aduit.html',       // 报销审核
-        EXPENSE_DETAIL_PAGE_URL: '../views/flowable/expense/expense_detail.html',     // 报销详情
-        EXPENSE_UPDATE_PAGE_URL: '../views/flowable/expense/expense_update.html',     // 报销详情
+        EXPENSE_LIST_URL: '/expense/list',                                  		   // 报销列表
+        EXPENSE_ADD_URL: '/expense/add',                                               // 报销添加
+        EXPENSE_UPDATE_URL: '/expense/update',                                         // 报销更新
+        EXPENSE_DELETE_URL: '/expense/delete',                                         // 报销删除
+        EXPENSE_EXECUTE_URL: '/expense/execute',                                       // 报销启动
+        EXPENSE_ROLL_BACK_URL: '/expense/rollback',                                    // 报销回退
+        EXPENSE_EXPENSE_VIEW_URL: '/expense/expenseView',                              // 报销流程
+        EXPENSE_PASS_URL: '/expense/pass',                                    		   // 报销通过
+        EXPENSE_UNPASS_URL: '/expense/unPass',                                         // 报销驳回
+        EXPENSE_TASk_LIST_URL: '/expense/taskList',                                    // 报销审核
+        EXPENSE_ADD_PAGE_URL: '../views/flowable/expense/expense_add.html', 	       // 报销流程
+        EXPENSE_ADUIT_PAGE_URL: '../views/flowable/expense/expense_aduit.html',        // 报销审核
+        EXPENSE_DETAIL_PAGE_URL: '../views/flowable/expense/expense_detail.html',      // 报销详情
+        EXPENSE_UPDATE_PAGE_URL: '../views/flowable/expense/expense_update.html',      // 报销详情
         EXPENSE_ROLL_BACK_PAGE_URL: '../views/flowable/expense/expense_rollback.html', // 报销回退
         
-        FLOWABLE_NODE_LIST: '/flowableNode/list',                                     // 流程节点
-        FLOWABLE_TARGET_IDS_URL: '/flowableNode/targetIds',                           // 回退节点
+        FLOWABLE_NODE_LIST: '/flowableNode/list',                                      // 流程节点
+        FLOWABLE_TARGET_IDS_URL: '/flowableNode/targetIds',                            // 回退节点
         
         
         
-        BOOK_LIST_URL: '/book/list',                                                  // 书籍列表
+        BOOK_LIST_URL: '/book/list',                                                   // 书籍列表
+        BOOK_ADD_URL: '/book/add',                                               	   // 书籍添加
+        BOOK_UPDATE_URL: '/book/update',                                         	   // 书籍更新
+        BOOK_DELETE_URL: '/book/delete',                                         	   // 书籍删除
+        BOOK_ADD_PAGE_URL: '../views/weixin/book/book_add.html',     				   // 报销详情
+        BOOK_UPDATE_PAGE_URL: '../views/weixin/book/book_update.html',                 // 报销详情
 	    
 	});
 });

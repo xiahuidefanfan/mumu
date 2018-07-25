@@ -2,6 +2,7 @@ package com.mumu.core.common.constant.factory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.DependsOn;
@@ -202,6 +203,12 @@ public class ConstantFactory implements IConstantFactory {
         }
     }
 
+    @Override
+    @Cacheable(value = Cache.CONSTANT, key = "'" + CacheKey.DICT_NAME + "'+#all")
+    public List<Map<String, Object>> getDicts(){
+        return dictMapper.list(null);
+    }
+    
     /**
      * 获取字典名称
      */
@@ -292,7 +299,7 @@ public class ConstantFactory implements IConstantFactory {
             return null;
         } else {
             EntityWrapper<Dict> wrapper = new EntityWrapper<>();
-            List<Dict> dicts = dictMapper.selectList(wrapper.eq("pid", id));
+            List<Dict> dicts = dictMapper.selectList(wrapper.eq("pId", id));
             if (dicts == null || dicts.size() == 0) {
                 return null;
             } else {
@@ -301,6 +308,22 @@ public class ConstantFactory implements IConstantFactory {
         }
     }
 
+    /**
+     * 查询字典
+     */
+    @Override
+    public List<Dict> findDictByCode(String code){
+        if (ToolUtil.isEmpty(code)) {
+            return null;
+        } else {
+            List<Dict> dicts = dictMapper.selectByCode(code);
+            if (dicts == null || dicts.size() == 0) {
+                return null;
+            } else {
+                return dicts;
+            }
+        }
+    }
     /**
      * 获取被缓存的对象(用户删除业务)
      */

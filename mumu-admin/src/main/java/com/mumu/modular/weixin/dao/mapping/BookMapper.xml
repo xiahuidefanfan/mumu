@@ -6,16 +6,18 @@
     <resultMap id="BaseResultMap" type="com.mumu.modular.weixin.model.Book">
         <id column="id" property="id"/>
         <result column="bookName" property="bookName"/>
+        <result column="price" property="price"/>
         <result column="owner" property="owner"/>
         <result column="type" property="type"/>
         <result column="deleteFlag" property="deleteFlag"/>
         <result column="isUpper" property="isUpper"/>
         <result column="createTime" property="createTime"/>
         <result column="updateTime" property="updateTime"/>
+        <result column="tips" property="tips"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-		id, bookName, owner, owner, deleteFlag,isUpper,createTime,updateTime
+		id, bookName, price, owner, type, deleteFlag,isUpper,createTime,updateTime,tips
 	</sql>
 
     <select id="selectByCode" resultType="dict">

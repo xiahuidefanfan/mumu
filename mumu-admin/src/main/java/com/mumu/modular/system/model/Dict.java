@@ -34,11 +34,17 @@ public class Dict extends Model<Dict> {
     /**
      * 父级字典
      */
-	private Integer pid;
+	private Integer pId;
     /**
      * 名称
      */
 	private String name;
+	
+	/**
+	 * 编码
+	 */
+	private String code;
+	
     /**
      * 提示
      */
@@ -61,23 +67,31 @@ public class Dict extends Model<Dict> {
 		this.num = num;
 	}
 
-	public Integer getPid() {
-		return pid;
-	}
+	public Integer getpId() {
+        return pId;
+    }
 
-	public void setPid(Integer pid) {
-		this.pid = pid;
-	}
+    public void setpId(Integer pId) {
+        this.pId = pId;
+    }
 
-	public String getName() {
+    public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public String getCode() {
+        return code;
+    }
 
-	public String getTips() {
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getTips() {
 		return tips;
 	}
 
@@ -95,7 +109,7 @@ public class Dict extends Model<Dict> {
 		return "Dict{" +
 			"id=" + id +
 			", num=" + num +
-			", pid=" + pid +
+			", pId=" + pId +
 			", name=" + name +
 			", tips=" + tips +
 			"}";

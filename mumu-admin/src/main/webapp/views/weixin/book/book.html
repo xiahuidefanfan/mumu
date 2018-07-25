@@ -30,7 +30,10 @@
 						<div class="fixed-table-toolbar mt-10">
 							<div class="bs-bars pull-left">
 								<div class="hidden-xs" role="group">
-									<button type="button" class="btn btn-primary " ng-click="openAdd()">
+									<button type="button" class="btn btn-primary " ng-click="openDetail()">
+										<i class="fa fa-file-text"></i>&nbsp;详情
+									</button>
+									<button type="button" class="btn btn-primary button-margin" ng-click="openAdd()">
 										<i class="fa fa-plus"></i>&nbsp;添加
 									</button>
 									<button type="button" class="btn btn-primary button-margin" ng-click="openUpdate()">
@@ -42,9 +45,9 @@
 								</div>
 							</div>
 						</div>
-				</div>
-				<div class="fixed-table-container pt-50">
-					<table class="layui-hide"  lay-filter="book_table"></table> 
+					<div class="fixed-table-container pt-38">
+						<table class="layui-hide"  lay-filter="book_table"></table> 
+					</div>
 				</div>
 			</div>
 		</div>

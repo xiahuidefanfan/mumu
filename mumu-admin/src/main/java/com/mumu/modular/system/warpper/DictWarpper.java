@@ -24,8 +24,8 @@ public class DictWarpper extends BaseControllerWarpper {
 
     @Override
     public void warpTheMap(Map<String, Object> map) {
-        Integer pid = (Integer) map.get("pid");
-        if (ToolUtil.isEmpty(pid) || pid.equals(0)) {
+        Integer pId = (Integer) map.get("pId");
+        if (ToolUtil.isEmpty(pId) || pId.equals(0)) {
             map.put("pName", "--");
         }
     }
