@@ -18,8 +18,8 @@
         select 
        	<include refid="Base_Column_List"/>
        	from weixin_recommend
-        order updateTime id ASC
-        LIMIT #{size}
+        order by createTime ASC
+        LIMIT #{size} 
     </select>
 
 </mapper>
