@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.mumu.modular.system.condition.DictSearchCondition;
 import com.mumu.modular.system.model.Dict;
 
 /**
@@ -26,5 +27,5 @@ public interface DictMapper extends BaseMapper<Dict> {
     /**
      * 查询字典列表
      */
-    List<Map<String, Object>> list(@Param("condition") String condition);
+    List<Map<String, Object>> list(@Param("condition") DictSearchCondition condition);
 }

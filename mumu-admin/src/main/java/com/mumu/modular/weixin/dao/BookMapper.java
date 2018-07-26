@@ -21,5 +21,5 @@ public interface BookMapper extends BaseMapper<Book>{
 	 * @param condition
 	 * @return
 	 */
-	List<Map<String, Object>> list(@Param("condition")String condition);
+	List<Map<String, Object>> list(@Param("name")String name);
 }

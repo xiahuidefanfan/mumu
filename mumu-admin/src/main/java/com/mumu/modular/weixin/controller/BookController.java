@@ -1,5 +1,6 @@
 package com.mumu.modular.weixin.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,9 @@ import com.mumu.core.log.LogObjectHolder;
 import com.mumu.core.support.RespData;
 import com.mumu.core.util.ToolUtil;
 import com.mumu.modular.weixin.model.Book;
+import com.mumu.modular.weixin.model.Recommend;
 import com.mumu.modular.weixin.service.IBookService;
+import com.mumu.modular.weixin.service.IRecommendService;
 import com.mumu.modular.weixin.warpper.BookWarpper;
 
 /**
@@ -35,15 +38,23 @@ import com.mumu.modular.weixin.warpper.BookWarpper;
 @Controller
 @RequestMapping(value="/book")
 public class BookController {
+    
+    /**
+     * 轮播位置码
+     */
+    private static final String BOOK_POSITION_CODE = "BOOK_POSITION_CAROUSEL";
 	
 	@Autowired
     private IBookService bookService;
-    
+	
+	@Autowired
+	private IRecommendService recommendService;
+	
     @RequestMapping(value="/list", method = RequestMethod.POST)
     @ResponseBody
     @Permission(Const.ADMIN_NAME)
-    public RespData list(@RequestParam(required = false) String condition) {
-        List<Map<String, Object>> list = this.bookService.list(condition);
+    public RespData list(@RequestParam(required = false) String name) {
+        List<Map<String, Object>> list = this.bookService.list(name);
         return RespData.getRespData(HttpStatus.OK.value(), new BookWarpper(list).warp(), "");
     }
 
@@ -82,20 +93,44 @@ public class BookController {
     }
     
     /**
-     * 删除菜单
+     * 删除书籍
      */
     @Permission(Const.ADMIN_NAME)
     @RequestMapping(value = "/delete")
     @BussinessLog(value = "删除书籍", key = "name", dict = BookDict.class)
     @ResponseBody
-    public RespData delete(@RequestBody List<String> dictIds) {
-        if (ToolUtil.isEmpty(dictIds)) {
+    public RespData delete(@RequestBody List<String> bookIds) {
+        if (ToolUtil.isEmpty(bookIds)) {
             throw new MumuException(BizExceptionEnum.REQUEST_NULL);
         }
         //用于记录日志
-        LogObjectHolder.me().set(bookService.selectBatchIds(dictIds));
-        this.bookService.deleteBatchIds(dictIds);
+        LogObjectHolder.me().set(bookService.selectBatchIds(bookIds));
+        this.bookService.deleteBatchIds(bookIds);
         return RespData.getRespData(HttpStatus.OK.value(), "", "删除书籍成功！");
+        
+    }
+    
+    /**
+     * 推荐书籍到轮播
+     */
+    @Permission(Const.ADMIN_NAME)
+    @RequestMapping(value = "/recommendCarousel")
+    @ResponseBody
+    public RespData recommendCarousel(@RequestBody List<String> bookIds) {
+        if (ToolUtil.isEmpty(bookIds)) {
+            throw new MumuException(BizExceptionEnum.REQUEST_NULL);
+        }
+        List<Recommend> recommends = new ArrayList<Recommend>();
+        // 生成推荐对象
+        for(String bookId : bookIds) {
+            Recommend recommend = new Recommend();
+            recommend.setBookId(bookId);
+            recommend.setCreateTime(new Date());
+            recommend.setPositionCode(BOOK_POSITION_CODE);
+            recommends.add(recommend);
+        }
+        this.recommendService.insertBatch(recommends);
+        return RespData.getRespData(HttpStatus.OK.value(), "", "推荐轮播成功！");
         
     }
 }

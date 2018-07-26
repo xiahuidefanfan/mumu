@@ -30,6 +30,7 @@ define(['app'], function(app) {
 	    DEPT_UPDATE_PAGE_URL: '../views/system/dept/dept_update.html',      		  // 部门更新
 	    
 	    DICT_LIST_URL: '/dict/list',                                                  // 字典列表
+	    DICT_LIST_BY_CODE_URL: '/dict/listByCode',									  // 字典列表
 	    DICT_ADD_URL: '/dict/add',                            	           		      // 字典添加
 	    DICT_UPDATE_URL: '/dict/update',						     	    		  // 字典更新
 	    DICT_DELETE_URL: '/dict/delete',                                              // 字典删除
@@ -76,8 +77,11 @@ define(['app'], function(app) {
         BOOK_ADD_URL: '/book/add',                                               	   // 书籍添加
         BOOK_UPDATE_URL: '/book/update',                                         	   // 书籍更新
         BOOK_DELETE_URL: '/book/delete',                                         	   // 书籍删除
-        BOOK_ADD_PAGE_URL: '../views/weixin/book/book_add.html',     				   // 报销详情
-        BOOK_UPDATE_PAGE_URL: '../views/weixin/book/book_update.html',                 // 报销详情
+        BOOK_RECOMMEND_CAROUSEL: '/book/recommendCarousel',                            // 轮播推荐
+        BOOK_ADD_PAGE_URL: '../views/weixin/book/book_add.html',     				   // 书籍添加
+        BOOK_UPDATE_PAGE_URL: '../views/weixin/book/book_update.html',                 // 书籍详情
+        
+        
 	    
 	});
 });

@@ -19,5 +19,5 @@ public interface IBookService extends IService<Book> {
 	 * @param condition
 	 * @return
 	 */
-	List<Map<String, Object>> list(String condition);
+	List<Map<String, Object>> list(String name);
 }

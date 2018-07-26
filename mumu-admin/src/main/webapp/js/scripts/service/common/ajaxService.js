@@ -5,7 +5,6 @@ define([ 'app' ], function(app) {
 		    var delay = $q.defer(); 
 			$http({
 				method : "post",
-				contentType: "application/json",
 				url : url,
 				data : params
 			}).success(function(data) {

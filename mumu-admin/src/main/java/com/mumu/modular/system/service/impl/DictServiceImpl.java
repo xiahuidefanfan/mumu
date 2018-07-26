@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.mumu.modular.system.condition.DictSearchCondition;
 import com.mumu.modular.system.dao.DictMapper;
 import com.mumu.modular.system.model.Dict;
 import com.mumu.modular.system.service.IDictService;
@@ -32,7 +33,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements ID
 	}
 
 	@Override
-	public List<Map<String, Object>> list(String condition) {
+	public List<Map<String, Object>> list(DictSearchCondition condition) {
 		return this.baseMapper.list(condition);
 	}
 	

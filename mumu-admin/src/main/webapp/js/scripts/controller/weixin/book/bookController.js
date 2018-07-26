@@ -1,17 +1,21 @@
-define(['app', 'urlConstants','operateUtil', 'tableUtil'], function (app) {
+define(['app', 'dictTreeService', 'urlConstants', 'dictConstants', 'operateUtil', 'tableUtil'], function (app) {
     app.controller('bookController',['$scope', 
+    								 'dictTreeService',
     								 'urlConstants', 
+    								 'dictConstants',
     								 'operateUtil', 
     								 'tableUtil',
     								 'layer', 
     					   function ($scope, 
+    							     dictTreeService,
     								 urlConstants, 
+    								 dictConstants,
     								 operateUtil, 
     								 tableUtil,
     								 layer) {
     	
     	
-    	  /**
+    	 /**
 	     * 主页面-添加书籍打开弹框
 	     */
 	    $scope.openAdd = function(){
@@ -25,7 +29,9 @@ define(['app', 'urlConstants','operateUtil', 'tableUtil'], function (app) {
                     }
     			}
 			);
-		     }
+	    	$scope.getBookUpperStatus();
+	    	$scope.getBookTypes();
+	     }
 	    
 	    /**
  	     *  添加-提交任务
@@ -37,16 +43,6 @@ define(['app', 'urlConstants','operateUtil', 'tableUtil'], function (app) {
  	    	 });
  	     }
  	     
- 	    /**
-     	 * 提交添加
-     	 */
-     	$scope.addSubmit = function(){
-     		operateUtil.doSubmit({
-     			scope: $scope, 
-     			url: urlConstants.BOOK_ADD_URL
-     		});
- 		}
-     	
      	/**
      	 * 修改书籍，弹框展示
      	 */
@@ -62,7 +58,57 @@ define(['app', 'urlConstants','operateUtil', 'tableUtil'], function (app) {
                      setChosed: true,
      			}
  			);
+     		$scope.getBookUpperStatus();
+     		$scope.getBookTypes();
  	    }
+
+    	/**
+    	 * 提交修改
+    	 */
+    	$scope.updateSubmit = function(){
+    		operateUtil.doSubmit({
+    			scope: $scope, 
+    			url: urlConstants.BOOK_UPDATE_URL
+    		});
+		}
+    	
+    	 /**
+     	 * 删除书籍
+     	 */
+     	 $scope.deleteBook = function(){
+     		 operateUtil.confirmSubmit({
+ 				scope: $scope,
+ 				url: urlConstants.BOOK_DELETE_URL,
+ 				multiple: true,
+ 				msg: '确定要删除选中的书籍吗？'
+ 			});
+     	 }
+    	
+    	/**
+    	 * 获取书籍状态下拉字典
+    	 */
+    	$scope.getBookUpperStatus = function(){
+    		 dictTreeService.getDicts($scope,"bookUpper", dictConstants.BOOK_UPPER);
+    	}
+    	
+    	/**
+    	 * 获取书籍类型下拉字典
+    	 */
+    	$scope.getBookTypes = function(){
+    		 dictTreeService.getDicts($scope,"bookType", dictConstants.BOOK_TYPE);
+    	}
+    	
+    	/**
+    	 * 推荐为轮播
+    	 */
+    	$scope.recommendCarousel = function(){
+    		operateUtil.confirmSubmit({
+      			scope:$scope,
+  				url: urlConstants.BOOK_RECOMMEND_CAROUSEL,
+  				multiple: true,
+  				msg: '确定要推荐为轮播吗？'
+      		});
+    	}
      	 
     	/**
     	 * 主页面-清除筛选条件
@@ -104,6 +150,7 @@ define(['app', 'urlConstants','operateUtil', 'tableUtil'], function (app) {
 	    */
 	   function setDefaultVars(){
 		   $scope.defaultSearchItem = {
+				 name: ''
 		   };// 搜索初始值
 		   $scope.searchItem = angular.copy($scope.defaultSearchItem);
 		   
@@ -115,7 +162,7 @@ define(['app', 'urlConstants','operateUtil', 'tableUtil'], function (app) {
    	    		      {field:'bookName', title: '书籍名称', align: 'center', valign: 'middle', sort: true},
    	    		      {field:'owner', title: '所有者', align: 'center', valign: 'middle', sort: true},
    	    		      {field:'price', title: '价格（元）', align: 'center', valign: 'middle', sort: true},
-   	    		      {field:'type', title: '书籍类型', align: 'center', valign: 'middle', sort: true},
+   	    		      {field:'typeName', title: '书籍类型', align: 'center', valign: 'middle', sort: true},
    	    		      {field:'isUpperName', title: '是否上架', align: 'center', valign: 'middle', sort: true},
    	    		      {field:'deleteFlagName', title: '是否删除', align: 'center', valign: 'middle', sort: true},
 	    		      {field:'createTimeFormat', title: '创建时间', align: 'center', valign: 'middle', sort: true},

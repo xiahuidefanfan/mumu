@@ -1,6 +1,15 @@
-define([ 'app', 'ajaxService', 'urlConstants' ], function(app) {
+define([ 'app', 'ajaxService', 'urlConstants'], function(app) {
 	app.service('dictTreeService', ['ajaxService', 'urlConstants', function(ajaxService, urlConstants) {
 		var me = this;
+		
+		/**
+		 * 获取字典，用于选择
+		 */
+		me.getDicts = function(scope, property,  code){
+			 ajaxService.ajaxPost(urlConstants.DICT_LIST_BY_CODE_URL, code).then(function(result){
+				 scope[property] = result.data;
+			 });
+		}
 
 		/**
 		 * 获取字典及字典树数据

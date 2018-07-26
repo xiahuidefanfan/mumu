@@ -32,8 +32,12 @@
 						<div class="form-group has-feedback">
 							<label class="col-sm-3 control-label">类别</label>
 							<div class="col-sm-9">
-								<input class="form-control"	
-									   ng-model="submitData.type">
+								<select class="form-control"  ng-model="submitData.type">
+						            <option value="{{t.code}}" 
+						            		ng-repeat="t in bookType" 
+						            		ng-selected="submitData.type==t.code">{{t.name}}
+						            </option>   
+						          </select>
 							</div>
 						</div>
 						<div class="hr-line-dashed"></div>
@@ -43,7 +47,20 @@
 						<div class="form-group has-feedback">
 							<label class="col-sm-3 control-label">是否上架</label>
 							<div class="col-sm-9">
-								<input class="form-control"	ng-model="submitData.isUpper" name="isUpper">
+								 <select class="form-control"  ng-model="submitData.isUpper">
+						            <option value="{{t.code}}" 
+						            		ng-repeat="t in bookUpper" 
+						            		ng-selected="submitData.isUpper==t.code">{{t.name}}
+						            </option>   
+						          </select>
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+						<div class="form-group has-feedback">
+							<label class="col-sm-3 control-label">价格</label>
+							<div class="col-sm-9">
+								<input class="form-control"	
+									   ng-model="submitData.price">
 							</div>
 						</div>
 						<div class="hr-line-dashed"></div>

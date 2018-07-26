@@ -150,26 +150,27 @@ define(['app', 'dictTreeService', 'permissionService', 'urlConstants','operateUt
 	    */
 	   function setDefaultVars(){
 		   $scope.defaultSearchItem = {
-			   name: ''   
+			   name: '',
+			   code: ''
 		   };// 搜索初始值
 		   $scope.searchItem = angular.copy($scope.defaultSearchItem);
 		   $scope.submitData = {}; // 选中的部门
 		   $scope.tableOptions = {
-				   tableId: 'dictTable',// 选取记录返回的值
-	               code: 'id',// 用于设置父子关系
-	               parentCode: 'pId',// 用于设置父子关系
-	               url: urlConstants.DICT_LIST_URL,//请求数据的ajax的url
-	               ajaxParams: $scope.searchItem, //请求数据的ajax的data属性
-	               columns: [
-	            	  {field: 'selectItem', radio: true},
-	                  {title: 'id', field: 'id', visible: false, align: 'center', valign: 'middle'},
-	                  {title: '名称', field: 'name', align: 'center', valign: 'middle', sortable: true},
-	                  {title: '编码', field: 'code', align: 'center', valign: 'middle', sortable: true},
-	                  {title: '父级名称', field: 'pName', align: 'center', valign: 'middle', sortable: true},
-	                  {title: '排序', field: 'num', align: 'center', valign: 'middle', sortable: true},
-	                  {title: '备注', field: 'tips', align: 'center', valign: 'middle', sortable: true},
-	               ],
-	             height: 540,
+			   tableId: 'dictTable',// 选取记录返回的值
+               code: 'id',// 用于设置父子关系
+               parentCode: 'pId',// 用于设置父子关系
+               url: urlConstants.DICT_LIST_URL,//请求数据的ajax的url
+               ajaxParams: $scope.searchItem, //请求数据的ajax的data属性
+               columns: [
+            	  {field: 'selectItem', radio: true},
+                  {title: 'id', field: 'id', visible: false, align: 'center', valign: 'middle'},
+                  {title: '名称', field: 'name', align: 'center', valign: 'middle', sortable: true},
+                  {title: '编码', field: 'code', align: 'center', valign: 'middle', sortable: true},
+                  {title: '父级名称', field: 'pName', align: 'center', valign: 'middle', sortable: true},
+                  {title: '排序', field: 'num', align: 'center', valign: 'middle', sortable: true},
+                  {title: '备注', field: 'tips', align: 'center', valign: 'middle', sortable: true},
+               ],
+               height: 540,
 	       }
 		   
 		   /**

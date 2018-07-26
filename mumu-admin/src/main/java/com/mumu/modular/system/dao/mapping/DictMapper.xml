@@ -20,16 +20,19 @@
         select
         <include refid="Base_Column_List"/>
         from sys_dict
-        where code like CONCAT('%',#{code},'%')
+        where pid = (select id from sys_dict where code = #{code})
     </select>
 
-    <select id="list" resultType="map">
+    <select id="list" resultType="map"> 
         select 
        	t1.id as id, t1.num as num, t1.code as code, t1.pid as pId, t1.name as name, t1.tips as tips, t2.name as pName
         FROM sys_dict t1 LEFT JOIN sys_dict t2 ON t1.pid = t2.id
         where 1 = 1
-        <if test="condition != null and condition != ''">
-            AND t1.name like CONCAT('%',#{condition},'%')
+        <if test="condition !=null and condition.name != null and condition.name != ''">
+            AND t1.name like CONCAT('%',#{condition.name},'%')
+        </if>
+         <if test="condition !=null and condition.code != null and condition.code != ''">
+            AND t1.code like CONCAT('%',#{condition.code},'%')
         </if>
         order by id ASC
     </select>

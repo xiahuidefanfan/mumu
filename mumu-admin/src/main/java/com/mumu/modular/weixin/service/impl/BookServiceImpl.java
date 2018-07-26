@@ -22,7 +22,7 @@ import com.mumu.modular.weixin.service.IBookService;
 public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements IBookService {
 	
 	@Override
-    public List<Map<String, Object>> list(String condition) {
-        return this.baseMapper.list(condition);
+    public List<Map<String, Object>> list(String name) {
+        return this.baseMapper.list(name);
     }
 }

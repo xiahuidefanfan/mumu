@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -21,6 +20,7 @@ import com.mumu.core.exception.MumuException;
 import com.mumu.core.log.LogObjectHolder;
 import com.mumu.core.support.RespData;
 import com.mumu.core.util.ToolUtil;
+import com.mumu.modular.system.condition.DictSearchCondition;
 import com.mumu.modular.system.model.Dict;
 import com.mumu.modular.system.service.IDictService;
 import com.mumu.modular.system.warpper.DictWarpper;
@@ -37,12 +37,19 @@ public class DictController {
 	@Autowired
     private IDictService dictService;
     
-    @RequestMapping(value="/list", method = RequestMethod.POST)
+    @RequestMapping(value="/list")
     @ResponseBody
     @Permission(Const.ADMIN_NAME)
-    public RespData list(@RequestParam(required = false) String code) {
-        List<Map<String, Object>> list = this.dictService.list(code);
+    public RespData list(@RequestParam(required = false)DictSearchCondition condition) {
+        List<Map<String, Object>> list = this.dictService.list(condition);
         return RespData.getRespData(HttpStatus.OK.value(), new DictWarpper(list).warp(), "");
+    }
+    
+    @RequestMapping(value="/listByCode")
+    @ResponseBody
+    public RespData listByCode(@RequestBody String code) {
+        List<Dict> list = this.dictService.selectByCode(code);
+        return RespData.getRespData(HttpStatus.OK.value(), list, "");
     }
     
     /**

@@ -37,6 +37,10 @@ public class BookWarpper extends BaseControllerWarpper {
             if(ToolUtil.equals(dict.get("code"), map.get("isUpper"))){
                 map.put("isUpperName", dict.get("name"));
             }
+            
+            if(ToolUtil.equals(dict.get("code"), map.get("type"))){
+                map.put("typeName", dict.get("name"));
+            }
         }
         if(ToolUtil.isNotEmpty(map.get("createTime"))) {
             map.put("createTimeFormat", DateUtil.formatDate((Date)map.get("createTime"),DateUtil.SECOND_FORMAT));

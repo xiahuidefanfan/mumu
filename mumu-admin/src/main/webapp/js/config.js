@@ -36,6 +36,7 @@ require.config({
         'tableUtil': 'common/util/tableUtil',
         'treeTableUtil': 'common/util/treeTableUtil',
         'urlConstants': 'common/constants/urlConstants',
+        'dictConstants': 'common/constants/dictConstants',
         'equalTo': 'directive/valid/equalTo',
         'ajaxService': 'service/common/ajaxService',
         'dictTreeService': 'service/common/dictTreeService',
