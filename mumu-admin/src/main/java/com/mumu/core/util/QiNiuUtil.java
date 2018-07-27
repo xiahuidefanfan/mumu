@@ -14,7 +14,7 @@ import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
 
 public class QiNiuUtil {
-	public static String fileUpload() {
+	public static void fileUpload() {
 		//构造一个带指定Zone对象的配置类
 		Configuration cfg = new Configuration(Zone.zone0());
 		//...其他参数参考类注释

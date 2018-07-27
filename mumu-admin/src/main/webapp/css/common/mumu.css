@@ -134,3 +134,12 @@ body{
 th[data-field=operation]{
 	text-align: center;
 }
+
+.pb-10{
+	padding-bottom: 10px;
+}
+
+.book-image-button{
+	position: relative;
+    top: 20px;
+}

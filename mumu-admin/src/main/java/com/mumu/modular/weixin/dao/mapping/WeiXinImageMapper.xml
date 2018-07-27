@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mumu.modular.weixin.dao.WeiXinImageMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.mumu.modular.weixin.model.WeiXinImage">
+        <id column="id" property="id"/>
+        <result column="businessId" property="businessId"/>
+        <result column="smallImageUrl" property="smallImageUrl"/>
+        <result column="normalImageUrl" property="normalImageUrl"/>
+        <result column="bigImageUrl" property="bigImageUrl"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+		id, businessId, smallImageUrl, normalImageUrl, bigImageUrl
+	</sql>
+
+</mapper>

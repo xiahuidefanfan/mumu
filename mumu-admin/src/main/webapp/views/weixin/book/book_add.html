@@ -4,6 +4,21 @@
 			<div class="form-horizontal bv-form" >
 				<div class="row" ng-form="editForm">
 					<div class="col-sm-6 b-r">
+						<div class="form-group">
+						    <label class="col-sm-3 control-label head-scu-label">头像</label>
+						    <div class="col-sm-4">
+						        <div class="pb-10"id="avatarPreId" >
+						        	<div><img width="100px" height="100px" src="="></div>
+						        </div>
+						    </div>
+						    <div class='book-image-button'>
+						    	<input type="file" style="width:20%;padding-bottom: 20px;padding-left: 15px;">
+   								<button type="button" class="btn btn-primary button-margin" ng-click="uploadFile()">
+									<i class="fa fa-upload"></i>&nbsp;上传
+								</button>
+						    </div>
+						</div>
+						<div class="hr-line-dashed"></div>
 						<div ng-class="{'form-group':true, 'has-feedback':true, 
 						               'has-error': editForm.bookName.$error.required 
 											     && editForm.bookName.$dirty}">

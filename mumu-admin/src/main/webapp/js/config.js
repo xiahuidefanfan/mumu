@@ -67,7 +67,7 @@ require.config({
         'contabs':['jquery'],
         'jquery.ztree': ['jquery'],
         'jquery.excheck': ['jquery'],
-        'bootstrapTreeTable': ['jquery','jquery.treegrid']
+        'bootstrapTreeTable': ['jquery','jquery.treegrid'],
     },
     urlArgs : "v=" + new Date().getTime(),
     // 启动程序 js/scripts/app.js
