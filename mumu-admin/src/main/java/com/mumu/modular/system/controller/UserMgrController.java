@@ -81,6 +81,8 @@ public class UserMgrController extends BaseController {
         user.setStatus(ManagerStatus.OK.getCode());
         user.setCreatetime(new Date());
         user.insert();
+        // 用于记录日志
+        LogObjectHolder.me().set(null);
         return RespData.getRespData(HttpStatus.OK.value(), null, "添加用户成功！");
     }
     

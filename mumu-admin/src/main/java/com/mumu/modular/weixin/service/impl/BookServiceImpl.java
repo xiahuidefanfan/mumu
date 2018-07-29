@@ -25,4 +25,5 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements IB
     public List<Map<String, Object>> list(String name) {
         return this.baseMapper.list(name);
     }
+	
 }

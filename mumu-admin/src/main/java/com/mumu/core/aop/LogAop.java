@@ -100,7 +100,7 @@ public class LogAop {
             msg = Contrast.contrastObj(dictClass, key, objOld, objNews[0]);
         } else {
             AbstractDictMap dictMap = (AbstractDictMap) dictClass.newInstance();
-            msg = Contrast.parseKey(dictMap,key, objOld);
+            msg = Contrast.parseKey(dictMap,key, objNews[0]);
         }
 
         LogManager.me().executeLog(LogTaskFactory.bussinessLog(user.getId(), bussinessName, className, methodName, msg));
